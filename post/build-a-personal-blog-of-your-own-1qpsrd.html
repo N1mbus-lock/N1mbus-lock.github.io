@@ -1,0 +1,925 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="N1mbus">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="使用思源+github pages+Hexo自动搭建博客方案">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搭建一个属于自己的个人博客">
+<meta property="og:url" content="http://example.com/post/build-a-personal-blog-of-your-own-1qpsrd.html">
+<meta property="og:site_name" content="N1mbus">
+<meta property="og:description" content="使用思源+github pages+Hexo自动搭建博客方案">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402135424.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402133756.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402145619.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402154553.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402154337.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402154443.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402154751.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402155057.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402160452.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402155405.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402155601.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402155654.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402155801.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402155847.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402155923.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402160524.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250402160626-z5bf1bm.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402161339.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402162723.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-04-02%20162750-20250402163127-mg7jggw.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402163348.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402163524.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402163645.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402163907.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402164118.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402164208.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402164330.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250402165103-6iolp44.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402165108.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402165947.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402165612.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402165617.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402165621.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402171956.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402173308.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402174114.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402174140.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402175054.png">
+<meta property="article:published_time" content="2025-04-02T13:13:42.000Z">
+<meta property="article:modified_time" content="2025-04-02T17:51:17.000Z">
+<meta property="article:author" content="N1mbus">
+<meta property="article:tag" content="github pages">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="思源">
+<meta property="article:tag" content="博客搭建">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402135424.png">
+  
+  
+  
+  <title>搭建一个属于自己的个人博客 - N1mbus</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":["home"]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"HGQ2AAsXTVipJuHOCxNQPl8A-gzGzoHsz","app_key":"xkvgsYTbMeB59u2gc4HqxaBN","server_url":"https://hgq2aasx.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>N1mbus的摆烂日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle">搭建一个属于自己的个人博客</span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-04-02 13:13" pubdate>
+          2025年4月2日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          21 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">搭建一个属于自己的个人博客</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="搭建一个属于自己的个人博客"><a href="#搭建一个属于自己的个人博客" class="headerlink" title="搭建一个属于自己的个人博客"></a>搭建一个属于自己的个人博客</h1><p>最近感觉自己需要一个个人博客来记录一下自己写的东西，就开始和队里师傅dre4m一起开始搭建，第一次搭建个人博客真的是非常的困难，最后好在也是搭好了，写一篇文章记录一下。</p>
+<p>感谢Wh1teJ0ker提供的方案，使用思源一键化上传文章到自己的个人博客，弄好了直接使用思源插件发布文章就可以了，真的非常方便。</p>
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><h3 id="思源准备"><a href="#思源准备" class="headerlink" title="思源准备"></a>思源准备</h3><p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402135424.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>在你的思源里面下载这两个插件</p>
+<h3 id="github准备"><a href="#github准备" class="headerlink" title="github准备"></a>github准备</h3><p>1.准备一个github账号，并创建一个yourname.github.io仓库</p>
+<p>类似于这样</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402133756.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>我的github名为N1mbus-lock,就创建一个N1mbus-lock.github.io的仓库</p>
+<p><a target="_blank" rel="noopener" href="https://pages.github.com/">https://pages.github.com/</a></p>
+<p>只在再在这个仓库里面写入你的index.html(名字必须得为index.html)，在进行访问<a target="_blank" rel="noopener" href="https://n1mbus.github.io/">https://N1mbus.github.io</a> 就可以访问到你写的页面了</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>N1mbus<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>N1mbus的个人主页<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello ~<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>这是一个简单的页面，你可以先在仓库里面放入一个index.html尝试一下是否能打开自己的页面</p>
+<p>如果可以打开页面，就可以将这个文件删除了，在这个方案中，我们不需要手动向这个仓库中添加任何文件，会自动将编译号之后的文件放里面</p>
+<p>2.然后创建一个存放你图片的仓库</p>
+<p>在我的github中，我将这个仓库命名为Pic。</p>
+<p>3.创建一个存放自己源码的仓库</p>
+<p>我的存放源码的仓库叫做blog</p>
+<h3 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h3><p>由于我使用的是wsl是自带的git，所以不需要再下载git，如果想在windows环境下运行git，可以自己尝试在windows上下载git，但是听说很容易报错<a target="_blank" rel="noopener" href="https://blog.csdn.net/yaorongke/article/details/119085413">git下载(Windows)</a></p>
+<h3 id="安装NodeJS"><a href="#安装NodeJS" class="headerlink" title="安装NodeJS"></a>安装NodeJS</h3><p>如果在windows环境下安装NodeJS，请参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/yaorongke/article/details/119084295">NodeJS安装及配置(Windows)</a></p>
+<p>我使用的方法是使用nvm安装安装NodeJS</p>
+<ol>
+<li><p>安装 <code>nvm</code>​：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash<br></code></pre></td></tr></table></figure></li>
+<li><p>使 <code>nvm</code>​ 立即可用：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">source</span> ~/.bashrc<br></code></pre></td></tr></table></figure></li>
+<li><p>使用 <code>nvm</code>​ 安装 Node.js（例如安装最新版的 Node.js）：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">nvm install node  <span class="hljs-comment"># 安装最新的版本</span><br></code></pre></td></tr></table></figure>
+
+<p> 或者安装特定版本：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">nvm install 16  <span class="hljs-comment"># 安装 Node.js 16.x 版本</span><br></code></pre></td></tr></table></figure></li>
+<li><p>设置默认版本（如果有多个版本）：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">nvm use node   <span class="hljs-comment"># 使用最新版本</span><br>nvm use 16     <span class="hljs-comment"># 使用 Node.js 16.x</span><br></code></pre></td></tr></table></figure></li>
+<li><p>检查版本确认安装：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">node -v<br>npm -v<br></code></pre></td></tr></table></figure></li>
+</ol>
+<p>但是nvm工具是国外的，可能下载失败（我采用的是给我的wsl使用镜像走我本机的代理）</p>
+<p>可以使用apt下载NodeJS</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt update<br><span class="hljs-built_in">sudo</span> apt install nodejs npm<br></code></pre></td></tr></table></figure>
+
+<p>但是这样安装可能安装的版本不支持</p>
+<h2 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h2><p>好啦，准备工作弄好了，我们要开始搭建博客了</p>
+<p>我使用的是采用Hexo搭建个人博客</p>
+<p>安装 Hexo</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install -g hexo-cli<br></code></pre></td></tr></table></figure>
+
+<p>查看版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">hexo -v<br></code></pre></td></tr></table></figure>
+
+<p>创建一个项目 hexo-blog 并初始化</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">hexo init hexo-blog<br><span class="hljs-built_in">cd</span> hexo-blog<br>npm install<br></code></pre></td></tr></table></figure>
+
+<p>本地启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">hexo g<br>hexo server<br></code></pre></td></tr></table></figure>
+
+<p>浏览器访问 <a href="http://localhost:4000，页面默认主图风格如下">http://localhost:4000，页面默认主图风格如下</a></p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402145619.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>是真的很简陋了，可以下载一个主题改改</p>
+<h2 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h2><p>由于我只用过fluid，我就只介绍一下fluid吧</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/fluid-dev/hexo-theme-fluid/releases">Fluid</a></p>
+<p>去里面下载最新的release版本解压到thems目录并重命名为fluid</p>
+<p>指定主题</p>
+<p>如下修改 Hexo 博客目录中的 _config.yml：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">theme: fluid  <span class="hljs-comment"># 指定主题</span><br>language: zh-CN  <span class="hljs-comment"># 指定语言，会影响主题显示的语言，按需修改</span><br></code></pre></td></tr></table></figure>
+
+<p>创建「关于页」</p>
+<p>首次使用主题的「关于页」需要手动创建：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">hexo new page about<br></code></pre></td></tr></table></figure>
+
+<p>创建成功后，编辑博客目录下 &#x2F;source&#x2F;about&#x2F;index.md，添加 layout 属性。</p>
+<h2 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h2><h3 id="config-yml"><a href="#config-yml" class="headerlink" title="_config.yml"></a>_config.yml</h3><p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402154553.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>按这个修改（这个在这个文件的开头）</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402154337.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>这里把主题修改为fluid（文件的末尾处）</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402154443.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>这个在文件的末尾，repo是ssh</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402154751.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<h3 id="thems-fluid-config-yml"><a href="#thems-fluid-config-yml" class="headerlink" title="&#x2F;thems&#x2F;fluid&#x2F;_config.yml"></a>&#x2F;thems&#x2F;fluid&#x2F;_config.yml</h3><p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402155057.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>这里是修改浏览器导航的那个头像图案的,如下图</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402160452.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>​​</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402155405.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>这里是修改打字效果的一些设置，我没改</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402155601.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>这里修改的的是浏览器导航的文字</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402155654.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402155801.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>这里修改的是背景图</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402155847.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>就是这个图</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402155923.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>修改的是首页的文字，就是上面那个图中间的文字</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402160524.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>这是修改关于页的一些配置，avatar图片是下图中的那个小猫图片</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250402160626-z5bf1bm.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>这是我修改后的代码和样子</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash">about:<br>  <span class="hljs-built_in">enable</span>: <span class="hljs-literal">true</span><br>  banner_img: /img/default.png<br>  banner_img_height: 60<br>  banner_mask_alpha: 0.3<br>  avatar: /img/avatar.png<br>  name: <span class="hljs-string">&quot;喵喵喵~&quot;</span><br>  intro: <span class="hljs-string">&quot;你有小鱼干吗&quot;</span><br>  <span class="hljs-comment"># 更多图标可从 https://hexo.fluid-dev.com/docs/icon/ 查找，`class` 代表图标的 css class，添加 `qrcode` 后，图标不再是链接而是悬浮二维码</span><br>  <span class="hljs-comment"># More icons can be found from https://hexo.fluid-dev.com/docs/en/icon/  `class` is the css class of the icon. If adding `qrcode`, the icon is no longer a link, but a hovering QR code</span><br>  icons:<br>    - &#123; class: <span class="hljs-string">&quot;iconfont icon-github-fill&quot;</span>, <span class="hljs-built_in">link</span>: <span class="hljs-string">&quot;https://github.com/N1mbus-lock&quot;</span>, tip: <span class="hljs-string">&quot;GitHub&quot;</span> &#125;<br>    - &#123; class: <span class="hljs-string">&quot;iconfont icon-qq-fill&quot;</span>, qrcode: <span class="hljs-string">&quot;/img/qq.png&quot;</span> &#125;<br><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402161339.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>关于社交软件的图标，可以在这里面找<a target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/icon/">https://hexo.fluid-dev.com/docs/icon/</a></p>
+<p>这些就是一些样式的修改，我放出来的是我自己修改过的地方，如果有更多需求，可以自己去看看代码然后按需修改</p>
+<h3 id="添加浏览量统计"><a href="#添加浏览量统计" class="headerlink" title="添加浏览量统计"></a>添加浏览量统计</h3><p>先去<a target="_blank" rel="noopener" href="https://console.leancloud.cn/">LeanCloud</a>里面注册一个账号然后认证一下</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402162723.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>创建一个应用，选择开发版</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-04-02%20162750-20250402163127-mg7jggw.png" srcset="/img/loading.gif" lazyload alt="屏幕截图 2025-04-02 162750"></p>
+<p>在设置里面的操作凭证里面，记录下appid，appkey和rest api服务器地址</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402163348.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>在这把这个改为true</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402163524.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>然后再在这把appid，appkey和rest api服务器地址依次填进去</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402163645.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>这里修改为这样</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402163907.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>可以看到出现了浏览次数</p>
+<h3 id="添加评论功能"><a href="#添加评论功能" class="headerlink" title="添加评论功能"></a>添加评论功能</h3><p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402164118.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>先把评论功能开启</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402164208.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>把之前的appid和appkey填进去就可以了</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402164330.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>评论头像加载不出来，应该是有地方没改到，但是想摆烂，就这样吧，也不是不能接受</p>
+<p>‍</p>
+<p>现在我们的网站已经在本地搭好了，接下来就是部署到github上</p>
+<p>‍</p>
+<h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><h3 id="PicGo配置"><a href="#PicGo配置" class="headerlink" title="PicGo配置"></a>PicGo配置</h3><p>把思源里面的插件配置好，让它能够把我们的图片放到github仓库里面</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250402165103-6iolp44.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402165108.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>选择github作为图床，然后按如图配置，如果不会生成token，<a target="_blank" rel="noopener" href="https://docs.github.com/zh/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens">github生成token</a>（生成不会过期的token，就不用一直换了）</p>
+<p>PicGO就配置好了</p>
+<h3 id="publisher配置"><a href="#publisher配置" class="headerlink" title="publisher配置"></a>publisher配置</h3><p>先把你之前写在本地的文件导入到你存放源码的仓库里面，只需要传如下图的文件就可以了（如果之前没有使用过github，传文件应该会成为一个很大的挑战，<del>因为我就在这被卡住了</del>）</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402165947.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>然后进入到思源里面进行配置插件</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402165612.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402165617.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402165621.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>导入平台之后点进hexo里面进行配置，配置内容如图</p>
+<h3 id="github-action"><a href="#github-action" class="headerlink" title="github action"></a>github action</h3><p>生成一对ssh公私钥</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ssh-keygen -t ed25519 -f hexo_deploy_key_nopass -N <span class="hljs-string">&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>请使用这个命令生成公私钥，笔者当时在配置时候就因为这个问题找了好久的报错</p>
+<h4 id="为什么要使用这个命令"><a href="#为什么要使用这个命令" class="headerlink" title="为什么要使用这个命令"></a>为什么要使用这个命令</h4><p>因为这个生成公私钥的命令不需要输入密码，而一般生成的公私钥需要输入密码，但是可能是因为我当时使用的那一份脚本没有输入密码，所以一直报权限错误（<del>应该是吧</del>）</p>
+<p>然后进入到github里面你存放源码的那一个仓库里面</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402171956.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>在setting里面选择<code>secrets and variables</code>​选择<code>Actions</code>​进入到这个界面，创建一个新的<code>secret</code>​</p>
+<p>命名为<code>HEXO_DEPLOY_PRI</code>​（因为那一份脚本里就是这样写的）然后将<code>hexo_deploy_key_nopass</code>​里的所有内容写进去</p>
+<p>然后进入到我们之前创建的那个yourname<a target="_blank" rel="noopener" href="https://github.com/N1mbus-lock/N1mbus-lock.github.io">.github.io</a>仓库</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402173308.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>setting里选择<code>Deploy keys</code>​，然后将<code>hexo_deploy_key_nopass.pub</code>​里的所用东西写进去，命名为<code>HEXO_DEPLOY_PUB</code>​</p>
+<p>现在已经完成了这两个仓库间的通信</p>
+<p>最后，再在存放源码的仓库里面的.github目录下创建一个一个工作流程然后在里面写入我们的配置文件main.yml就成功了</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402174114.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402174140.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>写入</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">name:</span> <span class="hljs-string">HEXO</span> <span class="hljs-string">CI</span><br><br><span class="hljs-attr">on:</span><br>  <span class="hljs-attr">push:</span><br>    <span class="hljs-attr">branches:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">main</span><br><br><span class="hljs-attr">jobs:</span><br>  <span class="hljs-attr">build:</span><br>    <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span><br>    <span class="hljs-attr">strategy:</span><br>      <span class="hljs-attr">matrix:</span><br>        <span class="hljs-attr">node-version:</span> [<span class="hljs-number">20.</span><span class="hljs-string">x</span>]<br><br>    <span class="hljs-attr">steps:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v3</span><br><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Use</span> <span class="hljs-string">Node.js</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">matrix.node-version</span> <span class="hljs-string">&#125;&#125;</span><br>        <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/setup-node@v3</span><br>        <span class="hljs-attr">with:</span><br>          <span class="hljs-attr">node-version:</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">matrix.node-version</span> <span class="hljs-string">&#125;&#125;</span><br><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Configuration</span> <span class="hljs-string">environment</span><br>        <span class="hljs-attr">env:</span><br>          <span class="hljs-attr">HEXO_DEPLOY_PRI:</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">secrets.HEXO_DEPLOY_PRI</span> <span class="hljs-string">&#125;&#125;</span><br>        <span class="hljs-attr">run:</span> <span class="hljs-string">|</span><br><span class="hljs-string">          mkdir -p ~/.ssh/</span><br><span class="hljs-string">          echo &quot;$HEXO_DEPLOY_PRI&quot; | tr -d &#x27;\r&#x27; &gt; ~/.ssh/id_rsa</span><br><span class="hljs-string">          chmod 600 ~/.ssh/id_rsa</span><br><span class="hljs-string">          ssh-keyscan github.com &gt;&gt; ~/.ssh/known_hosts</span><br><span class="hljs-string">          git config --global user.name &quot;&quot;  #这里写你的github昵称</span><br><span class="hljs-string">          git config --global user.email &quot;&quot; #这里写你的邮箱</span><br><span class="hljs-string"></span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Install</span> <span class="hljs-string">dependencies</span><br>        <span class="hljs-attr">run:</span> <span class="hljs-string">|</span><br><span class="hljs-string">          npm install -g hexo-cli</span><br><span class="hljs-string">          npm install hexo-deployer-git --save</span><br><span class="hljs-string">          npm install</span><br><span class="hljs-string"></span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Deploy</span> <span class="hljs-string">hexo</span><br>        <span class="hljs-attr">run:</span> <span class="hljs-string">|</span><br><span class="hljs-string">          hexo clean</span><br><span class="hljs-string">          hexo g</span><br><span class="hljs-string">          hexo d</span><br></code></pre></td></tr></table></figure>
+
+<p>好啦好啦，终于大功告成了，这样你就会拥有一个属于自己的博客了</p>
+<p>然后使用publisher发布就可以了</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/20250402175054.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<h2 id="出现的问题"><a href="#出现的问题" class="headerlink" title="出现的问题"></a>出现的问题</h2><h3 id="1-安全性"><a href="#1-安全性" class="headerlink" title="1.安全性"></a>1.安全性</h3><p>我们开始部署的存放blog源码的仓库公开的，好像去年爆出过一个漏洞可以使用一种插件修改别人的github仓库内容，以防别人破环我们的博客。</p>
+<p>解决方案：直接将blog源码仓库改为私人的即可，只要你给publisher中的token权限足够，不会出现通信问题</p>
+<h3 id="2-图片问题"><a href="#2-图片问题" class="headerlink" title="2.图片问题"></a>2.图片问题</h3><p>使用PicGO会将本地图片一直上传至github仓库并替换图片链接，导致在无网络的环境下思源上的图片加载不出来</p>
+<p>解决方案：在我们后来的实践中发现，publisher插件中存在内置的picgo，所以即使关闭picgo插件也能够上传并且不会替换你本地链接，网页上的链接也会是github上的链接（这样的话，好像没有必要picgo这个插件）</p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yaorongke/article/details/119089190">GitHub Pages + Hexo搭建个人博客网站，史上最全教程</a></p>
+<p><a target="_blank" rel="noopener" href="https://op30132.github.io/2020/02/05/github-action/">Hexo + github actions 自動化部署</a></p>
+<p>和Dre4m师傅一起搭建的，这是她写的文章，如果我写的有什么遗漏的，可以看看她的 <a target="_blank" rel="noopener" href="https://dre4m017.github.io/post/free-and-open-source-oneclick-deployment-solution-5yk6g.html">免费开源的一键化部署方案</a></p>
+<p>‍</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%85%B6%E4%BB%96/" class="category-chain-item">其他</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/github-pages/" class="print-no-link">#github pages</a>
+      
+        <a href="/tags/Hexo/" class="print-no-link">#Hexo</a>
+      
+        <a href="/tags/%E6%80%9D%E6%BA%90/" class="print-no-link">#思源</a>
+      
+        <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" class="print-no-link">#博客搭建</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>搭建一个属于自己的个人博客</div>
+      <div>http://example.com/post/build-a-personal-blog-of-your-own-1qpsrd.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>N1mbus</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年4月2日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2025年4月2日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/post/csapp-chapter-3-machinelevel-representation-of-programs-z17vqpx.html" title="CSAPP 第三章：程序的机器级表示">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">CSAPP 第三章：程序的机器级表示</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"HGQ2AAsXTVipJuHOCxNQPl8A-gzGzoHsz","appKey":"xkvgsYTbMeB59u2gc4HqxaBN","path":"window.location.pathname","placeholder":"说点什么吧","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

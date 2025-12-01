@@ -1,0 +1,1345 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="N1mbus">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="CSAPP的学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSAPP 第三章：程序的机器级表示">
+<meta property="og:url" content="http://example.com/post/csapp-chapter-3-machinelevel-representation-of-programs-z17vqpx.html">
+<meta property="og:site_name" content="N1mbus">
+<meta property="og:description" content="CSAPP的学习笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250414214524-qf66iz0.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250414214717-2wt6olg.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250414215718-gnrltgg.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250416071908-0qjfztz.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250416013620-w1tiw7m.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250416063942-eissxt7.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250416065139-bauhvjv.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250416072441-y93w7fw.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250417175323-mhvemb1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250417220407-rwsxbsc.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250419113820-lho605b.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250419114221-7umd0fw.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250419124703-cnyz19j.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250419144310-rxk9jqx.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250422200057-smgjmvb.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250422200219-k2z8izk.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250422215319-9mjd9gu.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250422224121-kgnr4vj.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250425144546-ylcbypx.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250425153828-u7y0rz7.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250427014852-p5y0u1r.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250425161958-mqb2h8b.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250417175323-mhvemb1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250426214913-kmsaupa.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/4494a74788aaeab67d84c4df16b2e7ff-20251109193148-ejvvwew.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20251109193421-ypx3l6q.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20251109200422-m8crf6q.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-04-25%20161956-20250427004711-bz7enn8.png">
+<meta property="article:published_time" content="2025-04-25T17:07:51.000Z">
+<meta property="article:modified_time" content="2025-04-25T17:07:52.000Z">
+<meta property="article:author" content="N1mbus">
+<meta property="article:tag" content="CSAPP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250414214524-qf66iz0.png">
+  
+  
+  
+  <title>CSAPP 第三章：程序的机器级表示 - N1mbus</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":["home"]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"HGQ2AAsXTVipJuHOCxNQPl8A-gzGzoHsz","app_key":"xkvgsYTbMeB59u2gc4HqxaBN","server_url":"https://hgq2aasx.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>N1mbus的摆烂日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle">CSAPP 第三章：程序的机器级表示</span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-04-25 17:07" pubdate>
+          2025年4月25日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          11k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          90 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">CSAPP 第三章：程序的机器级表示</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="CSAPP-第三章：程序的机器级表示"><a href="#CSAPP-第三章：程序的机器级表示" class="headerlink" title="CSAPP 第三章：程序的机器级表示"></a>CSAPP 第三章：程序的机器级表示</h1><p><a href="assets/541118%20%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%EF%BC%88%E5%8E%9F%E4%B9%A6%E7%AC%AC%E4%B8%89%E7%89%88%EF%BC%89-20250414204331-oqwbxqj.pdf">深入理解计算机系统（原书第三版）.pdf</a></p>
+<p>由于基础知识太差，xia0ji233师傅建议我来看一下CSAPP第三章。这本书看得好艰难！！！感觉自己大概都知道这些知识点，但是一些细节问题又不太了解，表达方式也和我之前学习的时候的表达方式不一样，最后加上这一章竟然有足足的一百一十页，真是看得我要晕字了。</p>
+<h2 id="程序编码"><a href="#程序编码" class="headerlink" title="程序编码"></a>程序编码</h2><p>这一部分讲的其实就是如何将一个.c文件变成一个可执行的elf文件</p>
+<p>比如，我们现在写了一个最简单的c程序</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>&#123;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;hello world&quot;</span>);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>	&#125;<br></code></pre></td></tr></table></figure>
+
+<p>现在我们拥有了一个.c文件，但是.c文件在linux里面不能直接运行</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250414214524-qf66iz0.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>所以我们需要将他编译为可执行文件（忘记写换行了）</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250414214717-2wt6olg.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>将c文件变为可以执行的elf文件，使用的是以下的命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-variable">$gcc</span> -g hello.c -o hello<br></code></pre></td></tr></table></figure>
+
+<p>​<code>-g</code>​保留一些调试信息，<code>-o</code>重命名</p>
+<p>在这一条指令背后，包含了四个过程</p>
+<p>1.预处理：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-variable">$gcc</span> -E hello.c -o hello1.i<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><ul>
+<li>​ <strong>​<code>#include</code>​</strong> 会将头文件内容插入到源代码中。</li>
+<li>​ <strong>​<code>#define</code>​</strong> 会替换代码中的宏定义。</li>
+<li>还会处理注释的删除、行号标记等。</li>
+</ul>
+</li>
+<li>预处理后，代码变成了一个单纯的、没有宏和头文件包含的标准 C 代码。</li>
+</ul>
+<p>2.编译：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-variable">$gcc</span> -S hello1.i -o hello1.s<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>编译器会进行语法分析、语义分析、优化等工作：</p>
+<ul>
+<li><strong>语法分析</strong>：检查代码是否符合 C 语言的语法规则。</li>
+<li><strong>语义分析</strong>：检查代码的逻辑、变量类型等是否正确。</li>
+<li><strong>生成汇编代码</strong>：将 C 代码转化为对应的汇编语言代码。</li>
+</ul>
+</li>
+<li><p>如果没有出现错误，编译器将生成 <code>.s</code> 汇编文件</p>
+</li>
+</ul>
+<p>例如我之前函数输错了就会在编译阶段检查出来</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250414215718-gnrltgg.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>3.汇编：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-variable">$gcc</span> -c。/ hello1.s -o hello1.o<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>编译阶段生成的汇编代码（<code>.s</code>​ 文件）会通过汇编器（<code>as</code>​）转换为目标文件（<code>.o</code> 文件）。</li>
+<li>汇编器会将汇编代码转化为机器代码（机器指令），并生成可重定向文件 <code>hello.o</code>。这个文件包含了程序的二进制代码，但还没有完成链接，因此还无法执行。</li>
+</ul>
+<p>4.链接：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-variable">$gcc</span> -g hello1.o -o hello1<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>链接器（<code>ld</code>）将所有的目标文件和标准库链接在一起，生成最终的可执行文件。</li>
+</ul>
+<p>‍</p>
+<p>对于生成的hello1.o文件和hello的可执行文件，由于是二进制文件，我们不能够在文本编辑器中显示，我们可以使用反汇编器使之根据机器代码生成一种类似于汇编代码的格式</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-variable">$objdump</span> -d xxx.o<br><span class="hljs-variable">$objdump</span> -d ELFfile<br></code></pre></td></tr></table></figure>
+
+<p>反汇编后的样子类似于这样</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250416071908-0qjfztz.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<h3 id="机器级代码"><a href="#机器级代码" class="headerlink" title="机器级代码"></a>机器级代码</h3><p>对机器级编程来说，其中两种抽象尤为重要：</p>
+<p>1.指令集体系结构或指令级架构来定义机器级程序的格式和行为——它定义了处理器，指令的格式，以及每条指令对状态的影响（翻译为不那么学术的说法就是当你编写 C 语言代码并编译成机器代码时，编译器会根据目标硬件的指令集生成适合的汇编或机器代码。）</p>
+<p>2.机器级程序使用的内存地址是虚拟地址——提供的内存模型看起来是非常大的字节数组（这个得去看看虚拟内存机制）</p>
+<p>然后在机器码里面，我们还能看到一些我们在写c的时候看不到的东西：</p>
+<p>1.程序计数器</p>
+<p>通常称为“pc”，在x86-64里面用寄存器rip表示，将下一条要执行的指令的地址放进这一个寄存器里面</p>
+<p>2.寄存器</p>
+<p>平常我们在汇编里面看到的寄存器，如下图这些</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250416013620-w1tiw7m.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>3.状态寄存器</p>
+<p>用于控制跳转指令条件的寄存器</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250416063942-eissxt7.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>4.向量寄存器</p>
+<p>可以存放一个或多个整数或浮点数值</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250416065139-bauhvjv.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>虽然c语言提供了一种模型，可以在内存中声明和分配各种数据类型对象，到那时机器码只是简单的将内存看成一个很大的，按字节寻址的数组。</p>
+<p>c语言中的聚合数据类型，例如数组和结构，在机器代码中用一段连续的字节来表示。</p>
+<p>即使是对标量的数据类型，汇编代码也不区分有符号到无符号整数，不区分各种类型指针，甚至不区分指针和整数。</p>
+<p>机器码具有如下特性：</p>
+<ul>
+<li>指令可以从任意地址编码，无对齐规则，只是任意地址开始的编码很可能产生错误的编码或者是运行产生错误的结果。</li>
+<li>指令长度从1-15个字节不等，运用了哈夫曼编码的思想：越常用的指令字节数越少，越不常用的指令字节数越多。</li>
+<li>反汇编器只是根据字节序列确定汇编代码，它完全不需要知道编译出该程序的源文件即可得到。</li>
+</ul>
+<h2 id="数据格式"><a href="#数据格式" class="headerlink" title="数据格式"></a>数据格式</h2><p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250416072441-y93w7fw.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>如图所示，大多数gcc生成的汇编代码指令都有一个字符后缀，表明操作数大小。</p>
+<p>我们可以看到使用“l”同时表示了四字节大小的int类型和八字节大小的double类型，那这在使用的时候会产生冲突吗？</p>
+<p>答案是不会的，因为double使用的是一组和整数完全不同的指令的寄存器</p>
+<h2 id="访问信息"><a href="#访问信息" class="headerlink" title="访问信息"></a>访问信息</h2><p>现在介绍一下16个通用寄存器</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250417175323-mhvemb1.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>在32位机器的时候，本来只有8个通用寄存器（上图的前八个），到64位后，增加了r8 - r15，虽然这些寄存器都是8字节的，但是仍然可以表示低字节，例如：对于rax，rax表示八字节，eax则表示4字节，ax表示最低两字节的高位，al表示最低两字节的低位；可以根据上图查看寄存器的低字节表示</p>
+<p>对于生成小于8字节结果指令，寄存器中字节生成有两条规则：</p>
+<p>1.生成1字节和2字节数字的指令会保持剩下的字节；</p>
+<p>2.生成4字节的指令会把高4位置零</p>
+<h3 id="操作数指示符"><a href="#操作数指示符" class="headerlink" title="操作数指示符"></a>操作数指示符</h3><p>大多数指令会有一个到两个操作数（operand），操作数可以是立即数（immediate），寄存器（register）或者是内存地址。具有两个操作数的指令会分源操作数（source operand）和目的操作数（destination operand）。</p>
+<p>在有两个操作数的情况下：源操作数可以是以上三种的任意，目的操作数不能为立即数，并且源操作数和目的操作数不能同时为内存地址。</p>
+<p>对于地址引用，存在一个公式</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250417220407-rwsxbsc.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<h3 id="数据传送指令"><a href="#数据传送指令" class="headerlink" title="数据传送指令"></a>数据传送指令</h3><h4 id="mov"><a href="#mov" class="headerlink" title="mov"></a>mov</h4><p>mov的意思就是将源操作数的值复制给目的操作数，例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">;已知rax=5，rdi=8<br>mov %rdi，%rax  ;将rdi里面的内容复制到rax里面，现在rax=8，rdi=8<br></code></pre></td></tr></table></figure>
+
+<p>当时根据我们上文中关于寄存器的知识，我们了解到，寄存器除了有八字节大小的，还可以使用一些小字节的寄存器，类似于eax，ax，al等。</p>
+<p>如果我们的源操作数比较端，但是目的寄存器比较长的时候，例如</p>
+<p>现在rax&#x3D;0x0000ffffffff4860，dl&#x3D;0x3b，现在我们需要将dl的值放入rax中</p>
+<p>如果使用<code>mov dl,rax</code>​;这是一个非法指令，<code>mov</code> 指令要求源操作数和目标操作数大小一致</p>
+<p>但是如果使用<code>mov dl,al</code>;这样就只能修改最低位的一个字节，现在rax里面的值就是rax&#x3D;0x0000ffffffff483b</p>
+<p>为了应对这种情况，我们就需要对源操作数进行扩展</p>
+<p>这时候就有两种情况：</p>
+<p>零（zero）扩展（movz）：就是把高位全部变为0，使用零扩展，在上述场景中，rax&#x3D;0x000000000000003b</p>
+<p>对于扩展到不同大小，分为以下命令，寄存器部分大小必须和指令后两位相匹配</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250419113820-lho605b.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>符号（sign）扩展（movs）：就是把高位补全为需要复制数的最高位（可能有点抽象）</p>
+<p>例如对于-42用二进制表示为<code>11010110</code>，现在它就是8位（1字节）的负数，使用符号扩展为64位（8字节），由于这个二进制的最高位为1，所以将它的高位全补位为1，即</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">11111111 11111111 11111111 11111111 11111111 11111111 11111111 11010110<br></code></pre></td></tr></table></figure>
+
+<p>转换为16进制就是0xffffffffffffffd6</p>
+<p>同理，如果最高位为0，就将高位补充为0</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250419114221-7umd0fw.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<h4 id="压入和弹出栈数据"><a href="#压入和弹出栈数据" class="headerlink" title="压入和弹出栈数据"></a>压入和弹出栈数据</h4><p>push指令就是将数据压入栈中</p>
+<p>类似于这两条指令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs 汇编">pushq %rbp<br>=<br>subq $8，%rsp<br>movq %rbp,(%rsp)<br></code></pre></td></tr></table></figure>
+
+<p>先将栈顶减去8，再把数据放到栈顶</p>
+<p>而pop指令则和push指令相反</p>
+<p>pop指令是将栈上的数据放到寄存器中</p>
+<p>类似于这两条指令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs 汇编">popq %rax<br>=<br>movq (%rsp),%rax<br>addq $8,%rsp<br></code></pre></td></tr></table></figure>
+
+<p>看一下书上的图解</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250419124703-cnyz19j.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>注意：push 的源操作数只能是立即数或者是寄存器， pop 的目的操作数只能是寄存器</p>
+<h2 id="算数和逻辑操作"><a href="#算数和逻辑操作" class="headerlink" title="算数和逻辑操作"></a>算数和逻辑操作</h2><p>这些操作被分为四组：加载有效地址，一元操作（一个操作数），二元操作（两个操作数），位移</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250419144310-rxk9jqx.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<h3 id="加载有效地址"><a href="#加载有效地址" class="headerlink" title="加载有效地址"></a>加载有效地址</h3><p>加载有效地址指令lea是mov的变形。它的指令形式是从内存读取数据到寄存器，但是实际上它根本就没有引用内存。</p>
+<p>lea的作用其实就是将括号里的值直接给目的数</p>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 汇编">lea (%rdi+8),%rax ;就是将rdi中存储的值加上8的值直接赋值给rax<br></code></pre></td></tr></table></figure>
+
+<p>现在就有一个疑问了，lea和mov的区别</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs 汇编">;假设rdi=0x100 ，在0x108地址处的值为0x25<br>;如果使用mov<br>mov [%rdi+8],%rax<br>;此时，rax的值是0x25<br>;如果使用lea<br>lea [%rdi+8],%rax<br>;此时rax的值就是0x108<br></code></pre></td></tr></table></figure>
+
+<p>由此，可以看出，lea没有访问rdi+8所指向的内存</p>
+<p>此时，我们就要开始想了，如果我mov不加[]不就和lea作用一样了吗</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs 汇编">lea %rdi，%rax<br>mov %rdi，%rax<br></code></pre></td></tr></table></figure>
+
+<p>这两条指令的作用是完全一样的</p>
+<p>但是如果是下面两条指令,他们的作用还是一样的吗</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs 汇编">mov %rdi+8,%rax<br>lea (%rdi+8),%rax<br></code></pre></td></tr></table></figure>
+
+<p>按理来说应该是同一个作用，<strong>但是，mov不支持这样的指令格式，所以不能这么使用</strong></p>
+<p>（应该讲清楚了吧）</p>
+<p>lea经常用于简单的算术表达式，采用书上的例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs 汇编">long scale(long x,long y,long z)&#123;<br>	long t=x+4*y+12*z;<br>	return t;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>使用lea进行算数运算</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs 汇编">;x in %rdi,y in %rsi,z in %rdx<br>leaq (%rdi,%rsi,4),%rax  ;x+4*y<br>leaq (%rdx,%rdx,2),%rdx ;z+2*z=3*z<br>leaq (%rax,%rdx,4),%rax ;(x+4*y)+4*(3*z)=x+4*y+12*z<br>ret<br></code></pre></td></tr></table></figure>
+
+<p>如果使用mov，指令数就会变大很多</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs 汇编">movq    %rsi, %rax        ; rax = y<br>imulq   $4, %rax          ; rax = 4*y<br>movq    %rdx, %rcx        ; rcx = z<br>imulq   $12, %rcx         ; rcx = 12*z<br>addq    %rcx, %rax        ; rax += 12*z<br>addq    %rdi, %rax        ; rax += x<br>ret<br></code></pre></td></tr></table></figure>
+
+<p>可以看到使用lea只需要三条指令就可以实现这个简单的计算，但是如果使用mov，实现这个简单的运算就需要六条指令，所以，lea经常用于简单计算。</p>
+<h3 id="一元和二元操作"><a href="#一元和二元操作" class="headerlink" title="一元和二元操作"></a>一元和二元操作</h3><p>一元操作和二元操作就是看操作数是几个</p>
+<p>例如：</p>
+<p>一元操作</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250422200057-smgjmvb.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>可以看到以上指令只有一个操作数，所以他们叫做一元操作</p>
+<p>二元操作</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250422200219-k2z8izk.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>可以看到以上指令拥有两个操作数，所以他们叫做二元操作</p>
+<h3 id="移位操作"><a href="#移位操作" class="headerlink" title="移位操作"></a>移位操作</h3><p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250422215319-9mjd9gu.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>位移操作，先给出位移量，然后第二项给出的是要位移的数。位移量可以是一个立即数，或者放在单字节寄存器%cl中</p>
+<p>位移分为逻辑位移和算数位移，算数位移会考虑符号位，逻辑位移则不会考虑符号位，但是符号位一般保存在高位，所以算数左移和逻辑左移的功能是一样的</p>
+<p>算数左移（sal）：左移一次，最低位补0</p>
+<p>逻辑左移（shl）：左移一次，最低位补0</p>
+<p>算数右移（sar）：右移一次，最高位补符号位</p>
+<p>逻辑右移（shr）：右移一次，最高位补0</p>
+<p>可以看到，sal和shl的作用是一样的</p>
+<h3 id="特殊算数操作"><a href="#特殊算数操作" class="headerlink" title="特殊算数操作"></a>特殊算数操作</h3><p>当我们将两个64位数进行相乘的时候，就可能会出现128位数，但是目前的寄存器最大为64，该怎么保存128位的数呢</p>
+<p>x86-64指令集对128位数的操作提供有限的支持</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250422224121-kgnr4vj.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>在我们之前看到的乘法和除法指令都是双操作数，他们代表所使用的数和产生的结果均没有超过64位，除此之外，x86-64指令集还提供单操作数的指令，如上图</p>
+<p>对于乘法指令，要求一个参数必须放在寄存器%rax中，而另一个作为指令的源操作数给出，然后得出的结果高64位放在%rdx，低64位放在%rax中</p>
+<p>对于除法指令，将寄存器%rdx放入被除数的高64位，%rax放入被除数的低64位，除数作为源操作数给出，将得出的商放入%rax，余数放在%rdx中</p>
+<h2 id="控制"><a href="#控制" class="headerlink" title="控制"></a>控制</h2><p>在之前的内容中，我们只研究了指令顺序执行的情况，但是顺序执行并不能够覆盖所有需求，我们希望程序有选择的执行一些代码，这个时候程序就不再是顺序执行，而是跳转执行</p>
+<p>跳转分条件跳转和无条件跳转，无条件跳转执行使用jump指令改变一组机器码的执行顺序，jump指令控制程序必定跳转到它指定的位置。但是这样，程序运行与之前的顺序运行没什么区别，要实现分支结构和循环结构需要用到条件跳转了。</p>
+<h3 id="条件码"><a href="#条件码" class="headerlink" title="条件码"></a>条件码</h3><p>除了整数寄存器，cpu还维护着一组单个位的条件码寄存器，他们描述了最近的算术或逻辑操作的属性。可以检查这些寄存器来执行条件分支指令。</p>
+<p>常用的条件码如下：</p>
+<p>　　CF：进位标志寄存器。最近的操作是最高位产生了进位。它可以记录无符号操作的溢出，当溢出时会被设为1。</p>
+<p>　　ZF：零标志寄存器，最近的操作得出的结果为0。当计算结果为0时将会被设为1。</p>
+<p>　　SF：符号标志寄存器，最近的操作得到的结果为负数。当计算结果为负数时会被设为1。</p>
+<p>　　OF：溢出标志寄存器，最近的操作导致一个补码溢出（正溢出或负溢出）。当计算结果导致了补码溢出时，会被设为1。</p>
+<p>lea指令不改变任何条件码，因为它是用来进行地址计算的。</p>
+<p>inc和dec指令会设置溢出和零标志，但是不会改变进位标志。</p>
+<p>除此之外，还有两个指令只用于修改条件码，但是不会修改操作数</p>
+<h4 id="cmp"><a href="#cmp" class="headerlink" title="cmp"></a>cmp</h4><p>cmp指令本质上是两个值的比较，类似于sub指令，但是不保留结果，只更新条件码寄存器</p>
+<p>cmp的操作数可以是寄存器，内存或则是立即数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 汇编">cmp S1,S2 ;S2-S1<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p>这个具体的大小判断有一点点复杂，书上也只是简单的提了一下可以通过条件码寄存器判断出大小，由于之前一直没接触过条件码寄存器，对这一块很不了解，想深入看看，所以自己找资料补充一下。</p>
+<p><a target="_blank" rel="noopener" href="https://yimitumi.com/2020/04/17/%E4%BA%8C%E5%8D%81%E5%85%AB-CMP-%E6%8C%87%E4%BB%A4(%E6%AF%94%E8%BE%83%E6%8C%87%E4%BB%A4)-%E6%B1%87%E7%BC%96%E7%AC%94%E8%AE%B0/">CMP 指令(比较指令)</a></p>
+<p>如果S2-S1&#x3D;0，即S1&#x3D;S2，将ZF设置为1，PF（奇偶标志寄存器）设置为1</p>
+<p>如果S2-S1!&#x3D;0,即S1!&#x3D;S2</p>
+<p>无符号数比较</p>
+<p>如果S1!&#x3D;S2,即ZF&#x3D;0</p>
+<p>如果S2&lt;S1,则S2-S1会产生借位，所以CF&#x3D;1</p>
+<p>如果S2&gt;S1,则S2-S1不会产生借位，所以CF&#x3D;0</p>
+<p>综上，就可以根据ZF和CF两个条件码寄存器判断大小</p>
+<p>有符号比较</p>
+<p>如果OF&#x3D;0，说明没有产生溢出，说明此时的正负为真实的正负</p>
+<p>如果S2&lt;S1,则S2-S1&lt;0，所以SF&#x3D;1</p>
+<p>如果S2&gt;S1,则S2-S1&gt;0，所以SF&#x3D;0</p>
+<p>如果OF&#x3D;1,说明产生了溢出，此时的正负为真实正负的相反结果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs 汇编">例如此时int S2=-64=1100 0000B，int S1=85=0101 0101B<br>本来S2-S1=-149=1 0110 1011B<br>但是我们定义的为int类型，只能保留到0110 1011B，这么一看，最高位就为0，即SF=0<br></code></pre></td></tr></table></figure>
+
+<p>所以，当OF&#x3D;0时，SF&#x3D;1，说明S2&lt;S1,SF&#x3D;0，说明S2&gt;S1</p>
+<p>当OF&#x3D;1时，SF&#x3D;1，说明S2&gt;S1,SF&#x3D;0，说明S2&lt;S1</p>
+<hr>
+<h4 id="test"><a href="#test" class="headerlink" title="test"></a>test</h4><p>test指令本质上时and指令，但是不保留结果，只更新条件码</p>
+<p>cmp的操作数可以是寄存器，内存或则是立即数</p>
+<p>test指令的典型用法是两个操作数是一样的用于判断操作数的情况，或则其中一个操作数是另一个掩码，用来指示哪些位应该被测试</p>
+<h3 id="访问条件码"><a href="#访问条件码" class="headerlink" title="访问条件码"></a>访问条件码</h3><p>条件码通常不会直接读取，尝试用的方法有三种：</p>
+<p>1.根据条件码的某种组合，将一个字节设置位0或者1</p>
+<p>2.可以根据条件跳转到程序的某个其他部分</p>
+<p>3.可以有条件地传送数据</p>
+<p>它们一般使用的常用后缀（下表是<a target="_blank" rel="noopener" href="https://xia0ji233.pro/2022/09/22/CSAPP_3/">xia0ji233</a>师傅整理出的，借鉴一下）</p>
+<table>
+<thead>
+<tr>
+<th>指令后缀</th>
+<th>同义后缀</th>
+<th>条件码</th>
+<th>设置条件</th>
+<th>英文释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>e</td>
+<td>z</td>
+<td>ZF==1</td>
+<td>相等（零）</td>
+<td>equal（zero）</td>
+</tr>
+<tr>
+<td>ne</td>
+<td>nz</td>
+<td>ZF==0</td>
+<td>不相等（不为零）</td>
+<td>not equal（not zero）</td>
+</tr>
+<tr>
+<td>s</td>
+<td>&#x2F;</td>
+<td>SF==1</td>
+<td>为负数</td>
+<td>sign（with -）</td>
+</tr>
+<tr>
+<td>ns</td>
+<td>&#x2F;</td>
+<td>SF==0</td>
+<td>为非负数</td>
+<td>not sign（without -）</td>
+</tr>
+<tr>
+<td>g</td>
+<td>nle</td>
+<td>(SF^OF)==0&amp;ZF==0</td>
+<td>有符号大于</td>
+<td>greater（not [less or equal]）</td>
+</tr>
+<tr>
+<td>ge</td>
+<td>nl</td>
+<td>(SF^OF)==0</td>
+<td>有符号大于等于</td>
+<td>greater or equal（not less）</td>
+</tr>
+<tr>
+<td>l</td>
+<td>nge</td>
+<td>(SF^OF)==1</td>
+<td>有符号小于</td>
+<td>less （not [greater or equal]）</td>
+</tr>
+<tr>
+<td>le</td>
+<td>ng</td>
+<td>(SF^OF)==1|ZF</td>
+<td>有符号小于等于</td>
+<td>less or equal （not greater）</td>
+</tr>
+<tr>
+<td>a</td>
+<td>nbe</td>
+<td>CF==0&amp;ZF==0</td>
+<td>无符号大于</td>
+<td>above （not [below or equal]）</td>
+</tr>
+<tr>
+<td>ae</td>
+<td>nb</td>
+<td>CF==0</td>
+<td>无符号大于等于</td>
+<td>above or equal （not below）</td>
+</tr>
+<tr>
+<td>b</td>
+<td>nae</td>
+<td>CF==1</td>
+<td>无符号小于</td>
+<td>below （not [above or equal]）</td>
+</tr>
+<tr>
+<td>be</td>
+<td>na</td>
+<td>CF|ZF==1</td>
+<td>无符号小于等于</td>
+<td>below or equal （not above）</td>
+</tr>
+</tbody></table>
+<h4 id="set"><a href="#set" class="headerlink" title="set"></a>set</h4><p>我们将第一种情况的指令设置为set指令</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250425144546-ylcbypx.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>需要注意的是这些指令的后缀表示不同的条件而不是操作数的大小</p>
+<p>一条set指令的目的操作数是低位单字节寄存器或则是一个字节的内存地址，指令会将这个字节设置为0或则1</p>
+<h4 id="跳转指令"><a href="#跳转指令" class="headerlink" title="跳转指令"></a>跳转指令</h4><p>无条件跳转：jmp</p>
+<p>直接跳转，即跳转目标作为指令的一部分汇编</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs 汇编">;例如<br> jmp .l1<br> pushq %rdx<br>.l1:<br> popq %rdx<br></code></pre></td></tr></table></figure>
+
+<p>间接跳转，即跳转目标是从寄存器或则内存位置读出，间接跳转的写法是’*’后跟一个操作数指示符</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs 汇编">;例如<br>jmp *%rax ;以rax内的值作为地址跳转<br>jmp *(%rax) ;以rax指向地址中的值作为地址跳转<br></code></pre></td></tr></table></figure>
+
+<p>有条件跳转：</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250425153828-u7y0rz7.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>条件跳转只能为直接跳转</p>
+<h3 id="跳转指令编码"><a href="#跳转指令编码" class="headerlink" title="跳转指令编码"></a>跳转指令编码</h3><p>跳转指令表面上是要指定一个绝对地址，但是实际上编码的时候是采用了偏移量的方式去编码，它会根据跳转指令所编码的值去对自己的 %rip 寄存器加或者是减去一个偏移量，但是需要注意的是，偏移量是从下一条指令开始计算的，这也就是为什么 jmp 如果后面编码值为 0 不会产生一个死循环。</p>
+<h3 id="用条件控制来实现条件分支"><a href="#用条件控制来实现条件分支" class="headerlink" title="用条件控制来实现条件分支"></a>用条件控制来实现条件分支</h3><p>对于一般的条件语句if</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">cmp</span><span class="hljs-params">(<span class="hljs-type">int</span> x,<span class="hljs-type">int</span> y)</span>&#123;<br><span class="hljs-comment">//x in %rdi,y in %rsi</span><br>    <span class="hljs-keyword">if</span>(x&gt;y)&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>汇编代码为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">.code<br>cmp proc<br>    mov $0,%rax<br>    cmp %rsi,%rdi<br>    jbe L1<br>    mov $1,%rax<br>L1:<br>    ret<br>cmp endp<br>end<br></code></pre></td></tr></table></figure>
+
+<p>如果有 if … else … 语句的话，一般采用条件跳转和无条件跳转组合的方式去实现，比如如下的表达式</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">if</span>(expr)&#123;<br>    truepart<br>&#125;<br><span class="hljs-keyword">else</span>&#123;<br>    falsepart<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>我们进行编译之后大概率会产生如下的汇编语句</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">test %rdi,%rdi<br>jz L1<br>//truepart<br>jmp done<br>L1:<br>//falsepart<br>done:<br>//over<br></code></pre></td></tr></table></figure>
+
+<h4 id="条件传送语句实现条件分支"><a href="#条件传送语句实现条件分支" class="headerlink" title="条件传送语句实现条件分支"></a>条件传送语句实现条件分支</h4><p>条件传送指令就和上面两类条件指令一模一样，符合条件时传送，不符合条件时不传送。</p>
+<p>同样，如下语句</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-comment">//x in %rdi,y in %rsi</span><br>    <span class="hljs-type">int</span> z;<br>    <span class="hljs-keyword">if</span>(x&gt;y)&#123;<br>        z=x-y;<br>    &#125;<br>    <span class="hljs-keyword">else</span>&#123;<br>        z=y-x;<br>    &#125;<br>    <span class="hljs-keyword">return</span> z<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>我们使用条件跳转语句可以很轻松地实现上述逻辑，但是我们也可以使用条件传送语句，事先算出两个部分 z 的值，先赋值假设正确的值，再用条件传送语句判断错误的条件赋值。</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250427014852-p5y0u1r.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>比如</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">movq %rdi,%rax<br>subq %rsi,%rax;let %rax=x-y<br>movq %rsi,%rbx<br>subq %rdi,%rbx;let %rbx=y-x<br>cmp %rsi,%rdi<br>cmovle %rbx,%rax;if x&lt;=y movq %rbx,%rax<br>ret<br></code></pre></td></tr></table></figure>
+
+<p>可能你会疑问，这样子效率会不会遍低，因为如果运算更复杂一点，我需要把两个值都算出来，执行的指令会变多。确实，条件跳转比条件转移比起来执行的指令少，而且能泛用性广，举个例子：如果 if … else … 里面有其它语句，比如输出语句，那么我们条件传送指令显然就不能用，而条件跳转能应对这种情况。</p>
+<p>但是条件传送实现的条件分支比条件转移实现的分支运行速度快。你可能很惊讶，为什么执行的指令多反而运行速度还快了，那是因为当今的 CPU 都是流水作业，一个指令的执行分为五个步骤，它同一时间可以执行五条指令对应的不同操作。而流水作业的前提条件是我能清楚地知道我接下来要执行的代码，如果我都不知道我接下来要执行什么代码，那么我肯定不能很好的运用流水作业了。</p>
+<p>条件控制语句在执行完毕之前，谁也不知道它是跳转或者不跳转，也就无法知道它接下来要执行的指令，我们只能选择等待条件跳转指令执行完毕再次填充指令流水作业，速度自然就慢了。而条件转移并不改变指令的执行顺序，因此它依然能利用 CPU 的流水作业。</p>
+<table>
+<thead>
+<tr>
+<th>实现分支的方式</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>条件跳转</td>
+<td>能应对所有分支情况，执行的指令较少</td>
+<td>执行速度慢，不能很好的利用CPU的指令流水</td>
+</tr>
+<tr>
+<td>条件传送</td>
+<td>执行速度快，能很好的利用CPU的流水作业</td>
+<td>不能应对所有的分支状况，需要把所有的情况提前计算，执行的指令较多</td>
+</tr>
+</tbody></table>
+<h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><p>高级语言中，除了顺序，选择以外，还有一种结构就是循环结构了，但是事实上我们依然可以通过条件转移的方式实现循环的效果，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">movq $10,%rcx;set loop time<br>do:<br>    ;do something<br>    subq $1,%rcx<br>    test %rcx,%rcx<br>    jns do<br></code></pre></td></tr></table></figure>
+
+<p>以上例程可以循环10次执行，并且可以通过修改立即数 $10 来改变循环次数。</p>
+<p>把它转为 C 语言来写就很像我们的 do-while 循环语句：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">test</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-type">int</span> i=<span class="hljs-number">10</span>;<br>    <span class="hljs-keyword">do</span>&#123;<br>        <span class="hljs-comment">//something</span><br>        i--;<br>    &#125;<span class="hljs-keyword">while</span>(i&gt;=<span class="hljs-number">0</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>那么除了 do - while 我们还有 while，for 三种类型的循环。</p>
+<p>它们的模板分别是什么样的呢，我们来看看。</p>
+<p>while 的 C 写法：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">test</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-type">int</span> i=<span class="hljs-number">10</span>;<br>    <span class="hljs-keyword">while</span>(i&gt;=<span class="hljs-number">0</span>)&#123;<br>        <span class="hljs-comment">//something</span><br>        i--;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>对应的汇编代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">    movq $10,%rcx<br>do:<br>    subq $1,%rcx<br>    test %rcx,%rcx<br>    js end<br>    ;do something<br>    jmp do<br>end:<br>    ret<br></code></pre></td></tr></table></figure>
+
+<p>for 的 C 写法：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">test</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">10</span>;i++)&#123;<br>        <span class="hljs-comment">//something</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>对应的汇编代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">movq %rcx,0<br>do:<br>    ;something<br>    addq %rcx,$1<br>    cmpq $10,%rcx<br>    jl do<br></code></pre></td></tr></table></figure>
+
+<p>如果循环语句中有 continue，我们就跳过循环体中的所有逻辑，直接到循环条件判断和循环变量的修改，如果有 break 我们直接跳出循环即可。</p>
+<p>要点：<strong>掌握循环结构的写法和循环的判断</strong>。</p>
+<h3 id="switch语句"><a href="#switch语句" class="headerlink" title="switch语句"></a>switch语句</h3><p>其实有人说，switch 就可以理解为 if elseif else if … 的形式，其实从实现来说，两者并没有太大的差别，但是执行效率上会有巨大差别，如果语句在第 n+1 个条件成立了，那么程序进行了 n+1 次判断。而 switch 语句在多数情况下（case语句超过四条，值的跨度小）并没有使用条件转移来区分各个值之间的跳转，当然它会区分一般值和默认值（default），一般值我们使用跳转表的形式实现。</p>
+<p>比如如下的语句：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> test&#123;<br>    <span class="hljs-type">long</span> val=<span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">switch</span>(n)&#123;<br>        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:<br>            val+=<span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>:<br>            val-=<span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> <span class="hljs-number">3</span>:<br>            val*=<span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> <span class="hljs-number">4</span>:<br>            val-=<span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">default</span>:<br>            val++;<br>    &#125;<br>    <span class="hljs-keyword">return</span> val;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>将它翻译为汇编语言之后可能会出现这样的逻辑：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">.L1:<br>    .quad .L2<br>    .quad .L3<br>    .quad .L4<br>    .quad .L5<br>    .quad .L6<br><br>test proc:<br>    movq $1,%rax<br>    subq $1,%rdi<br>    cmpq $3,%rdi<br>    ja L6<br>    jmp *.L1(,%rdi,8)<br>L2:<br>    addq $2,%rax<br>    jmp end<br>L3: <br>    subq $2,%rax<br>    jmp end<br>L4:<br>    mul $2,%rax<br>    jmp end<br>L5:<br>    div $2,%rax<br>    jmp end<br>L6:<br>    addq $1,%rax<br>end:<br>    ret<br>test endp<br></code></pre></td></tr></table></figure>
+
+<p>我们可以看到跳转表的一个优势所在，对于每一个条件，都可以只进行一次判断就跳转到指定位置运行，当然我们实际在用的时候，可能会出现空语句，或者是滑落的情况（即语句下面没有 break），如果出现滑落，我们就删除对应语句块的 jmp 命令，如果出现空语句（case 后面没有语句），我们不新增加标签，而是直接设置跳转表的位置为下一个有值的标签。</p>
+<h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><p>过程是软件中一种很重要的抽象。他提供了一种封装代码的方式，用一组指定的参数和一个可选的返回值实现了某种功能。然后我们可以在程序中不同的地方调用这个函数。</p>
+<h3 id="运行时栈"><a href="#运行时栈" class="headerlink" title="运行时栈"></a>运行时栈</h3><p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250425161958-mqb2h8b.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>我感觉学习pwn的没有不熟悉这张图的吧</p>
+<p>C 语言调用机制的一个关键特性就是使用了栈结构提供的后进先出的管理原则。当P</p>
+<p>调用Q的时候，我们需要保存P的状态，并为Q开辟出一块位置存放Q所需要的东西。当Q运行完返回P时，我们需要将Q占用的位置释放，并且恢复到调用Q函数之前的那种状态，除了rax用于保存返回值不需要恢复。</p>
+<p>上面的图反映的状态就是调用Q时栈上的分布。</p>
+<h3 id="转移控制"><a href="#转移控制" class="headerlink" title="转移控制"></a>转移控制</h3><p>在我们调用Q时，我们只需要把rip的值改为Q代码运行的地方就可以开始执行Q的指令，但是当Q执行结束，我们该继续执行P中的语句时，我们也该将rip中的值改到我们需要执行的P中的指令的地址。</p>
+<p>这时候，就需要使用call指令</p>
+<p>call指令的作用是先将当前指令下一步指令地址的值放入栈中（也就是我们说的返回地址），然后跳转到Q代码的地址开始执行，在Q执行结束之后调用ret，将之前放在栈上的返回地址放入到rip中</p>
+<h3 id="数据传送"><a href="#数据传送" class="headerlink" title="数据传送"></a>数据传送</h3><p>众所周知，一般我们调用一个函数都是有参数的，例如int add(int a,int b),我们调用的时候格式就为add(3,4)</p>
+<p>如果我们想运行这个函数，在调用到这个函数的时候就需要把参数也交给这个函数，所以我们得知道，我们是怎么将这个参数交给这个函数的</p>
+<p>在x86-64架构的下，传参是由寄存器进行传参的：<strong>前六个参数分别传递给寄存器 %rdi,%rsi,%rdx,%rcx,%r8,%r9，若还有剩余参数，剩余参数从右往左依次入栈。</strong></p>
+<h3 id="栈上的局部存储"><a href="#栈上的局部存储" class="headerlink" title="栈上的局部存储"></a>栈上的局部存储</h3><p>有些时候，局部数据必须存放在内存中，常见的情况：</p>
+<p>1.寄存器不足够存放本地所有的本地数据</p>
+<p>2.对一个局部变量使用地址运算符’&amp;’,因此必须能够为他产生一个地址</p>
+<p>3.某些局部变量是数组或结构，因此必须能够通过数组或结构引用被访问到</p>
+<h3 id="寄存器中的局部存储空间"><a href="#寄存器中的局部存储空间" class="headerlink" title="寄存器中的局部存储空间"></a>寄存器中的局部存储空间</h3><p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250417175323-mhvemb1.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>这是我们之前看过的图，在它上面写了调用者保存和被调用者保存，这是当我们在调用函数的时候，可能会修改一些寄存器的值，但是，当我们程序结束返回的时候，除了rax这些寄存器的值应该恢复到调用函数前的值，所以这些值是怎么保存的呢</p>
+<p>调用者保存:调用函数的代码（调用者）负责保存那些在函数调用过程中可能被改变的寄存器。</p>
+<p>在调用函数之前，调用者会先保存这些寄存器的值，通常是通过将寄存器的值压入栈中。被调用的函数执行时，会使用这些寄存器。如果被调用的函数修改了它们，调用者在返回时会从栈中恢复寄存器的值。</p>
+<p>被调用者保存：被调用的函数负责保存它自己使用的寄存器</p>
+<p>被调用的函数在开始时保存它需要使用的寄存器的值，通常将这些寄存器的值压入栈中。被调用的函数执行时，可以修改这些寄存器，但在函数返回之前，它必须恢复寄存器的原始值。</p>
+<h2 id="数组分配和访问"><a href="#数组分配和访问" class="headerlink" title="数组分配和访问"></a>数组分配和访问</h2><p>C语言中的数组是一种将标量数据集成更大数据类型的方式。</p>
+<h3 id="基本原则"><a href="#基本原则" class="headerlink" title="基本原则"></a>基本原则</h3><p>对于数据类型T和整形常熟N，起始位置为X，L为数据类型T的大小</p>
+<p>如果我申明T A[N]</p>
+<p>这表示我申请了一块LN大小的连续空间，起始位置是X，我们可以用0~N-1对这一空间的所有数进行索引。元素i的地址为X+i*L</p>
+<p>例如：</p>
+<p>int a[10],我们知道int类型大小为4字节，所以开辟了40个字节的空间存放a数组</p>
+<p>假设起始位置为0x400000，那么a数组中每一个元素位置为0x400000+4*i</p>
+<h3 id="指针运算"><a href="#指针运算" class="headerlink" title="指针运算"></a>指针运算</h3><p>C语言允许对指针进行运算，而计算出来的值会根据该指针引用的数据类型的大小进行伸缩。p+i 相当于 Xp+i*sizeof(type) 的地址（Xp 表示数组 p 的基地址）。</p>
+<p>此外，书上还介绍了&amp;和*</p>
+<p>&amp;为取地址符，根据这个名字，我们也该知道这个符号的作用是取出变量的地址</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs 汇编">例如<br>b=&amp;a；//这是将a变量存在的地址交给b<br></code></pre></td></tr></table></figure>
+
+<p>*为解引用运算符，这个符号的作用是访问指针所指向的地址上的值</p>
+<p>根据上个例子，现在b为a的地址，如果a的内容为5<br>那么*b就为5</p>
+<h3 id="嵌套数组"><a href="#嵌套数组" class="headerlink" title="嵌套数组"></a>嵌套数组</h3><p>当我们定义了一个 int A[5][3] 时，相当于做了如下定义：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">typedef</span> <span class="hljs-type">int</span> <span class="hljs-type">row3_t</span>[<span class="hljs-number">3</span>];<br><span class="hljs-type">row3_t</span> A[<span class="hljs-number">5</span>];<br></code></pre></td></tr></table></figure>
+
+<p>将A看作一个有5个元素的数组，每个元素都是三个int的数组，所以关于A中元素的地址的计算公式为&amp;A[i][j]&#x3D;XA(起始地址)+4(int类型大小) *(5**i+j)</p>
+<h2 id="异质的数据结构"><a href="#异质的数据结构" class="headerlink" title="异质的数据结构"></a><span data-type="text" style="white-space-collapse: break-spaces;">异质的数据结构</span></h2><p>C语言提供了两种将不同类型的对象组合到一起创建数据类型的机制:</p>
+<p>1.结构(structure),用关键字 struct 来声明,将多个对象集合到一个单位中;</p>
+<p>2.联合(union),用关键 字 union 来声明,允许用几种不同的类型来引用一个对象。</p>
+<h3 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h3><p>C语言的struct声明创建一个数据类型，将可能不同类型的对象聚合到一个对象中。用名字来引用结构的各个组成部分。类似于数组的实现,结构的所有组成部分都存放在内存中一段连续的区域内,而指向结构的指针就是结构第一个字节的地址。</p>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs 汇编">struct rec &#123;<br>int i;<br>int j;<br>int a [2];<br>int *p;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>然后内存中的排列为</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20250426214913-kmsaupa.png" srcset="/img/loading.gif" lazyload alt="image">9</p>
+<p>我们看到，我们将声明的数组嵌套在这个结构体空间中，尽管这些并不是同一个类型的数据，但是我们仍然将他存储到一个对象中，通过偏移进行查找</p>
+<h3 id="联合"><a href="#联合" class="headerlink" title="联合"></a>联合</h3><p>联合提供了一种方式,能够规避C语言的类型系统,允许以多种类型来引用一个对 象。联合声明的语法与结构的语法一样,只不过语义相差比较大。它们是用不同的字段来引用相同的内存块。</p>
+<p>联合和结构体不同的点在于，结构体为它声明的每个变量都分配了一个空间，但是联合是是大家共用的一个空间</p>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs 汇编">union rec &#123;<br>int i;<br>int j;<br>int a [2];<br>int *p;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>这个例子和上一个相似，但是这个分配的空间就只有八（最大的那一个数据所分配的空间）所以它同一时间只允许一个数据存在在这个空间中</p>
+<h3 id="数据对齐"><a href="#数据对齐" class="headerlink" title="数据对齐"></a>数据对齐</h3><p>对于 C 语言而言，为了方便内存管理会对数据类型做出这样的规定：大小为 n(n&lt;&#x3D;8) 的数据必须对齐在地址为 n 的倍数上，如果当前地址不符合要求则会往后顺延，中间的内存可能会因为填充产生浪费。</p>
+<p>假设你有一个包含以下数据类型的结构体：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Data</span> &#123;</span><br>    <span class="hljs-type">char</span> a;       <span class="hljs-comment">// 1 byte</span><br>    <span class="hljs-type">int</span> b;        <span class="hljs-comment">// 4 bytes</span><br>    <span class="hljs-type">char</span> c;       <span class="hljs-comment">// 1 byte</span><br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>按我们之前学习的知识来看，他应该在空间中占据6个字节的空间，但是事实上，它占据了12个字节</p>
+<p>为什么会占据12个字节，为了提高访问效率，结构体的内存对齐要求通常是其最大成员的对齐方式。即一个结构体的对齐方式是它最大成员类型的对齐大小</p>
+<hr>
+<p>当时学的时候其实没有太过深入的去理解这一个点，只以为每一个成员变量都会按照结构体中的最大成员变量进行对齐，但其实并不是这样，现在我将结合例子更深入的探讨一下这个问题。</p>
+<p>在我们之前的例子里面，结构体是这样的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">struct Data &#123;<br>    char a;       // <span class="hljs-number">1</span> byte<br>    <span class="hljs-built_in">int</span> b;        // <span class="hljs-number">4</span> <span class="hljs-built_in">bytes</span><br>    char c;       // <span class="hljs-number">1</span> byte<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>这个结构体在内存中占据的大小确实是12字节</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/4494a74788aaeab67d84c4df16b2e7ff-20251109193148-ejvvwew.png" srcset="/img/loading.gif" lazyload alt="4494a74788aaeab67d84c4df16b2e7ff"></p>
+<p>但是如果结构体稍微修改一下顺序，变成这样</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">struct Data &#123;<br>    char a;       // <span class="hljs-number">1</span> byte<br>	char b;       // <span class="hljs-number">1</span> byte<br>    <span class="hljs-built_in">int</span> c;        // <span class="hljs-number">4</span> <span class="hljs-built_in">bytes</span><br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>此时结构体的大小就会变成8字节，简单的顺序修改就使得整个结构体空间变小</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20251109193421-ypx3l6q.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>然后我们可以在创建一个更复杂的结构体</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python">struct Data &#123;<br>    char a;       // <span class="hljs-number">1</span> byte<br>    <span class="hljs-built_in">int</span> b;        // <span class="hljs-number">4</span> <span class="hljs-built_in">bytes</span><br>	long c;       // <span class="hljs-number">8</span> <span class="hljs-built_in">bytes</span><br>	<span class="hljs-built_in">int</span> d;        // <span class="hljs-number">4</span> <span class="hljs-built_in">bytes</span><br>	char e;		  // <span class="hljs-number">1</span> <span class="hljs-built_in">bytes</span><br>	char f;		  // <span class="hljs-number">1</span> <span class="hljs-built_in">bytes</span><br>	<span class="hljs-built_in">int</span> g;		  // <span class="hljs-number">4</span> <span class="hljs-built_in">bytes</span><br>	long h;		  // <span class="hljs-number">8</span> <span class="hljs-built_in">bytes</span><br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/image-20251109200422-m8crf6q.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>可以看到最开始char a先4字节对齐，然后和int b一起形成了8字节对齐，后面的char e和char f紧挨着然后填充两字节形成了4字节对齐，和前面的int d刚好形成了8字节对齐。</p>
+<p>从这三个例子中，我们可以看出，结构体中的数据对齐并不是每个成员都按照最大成员进行对齐的，而是**<u>结构体的总大小一定是最大成员大小的整数倍，至于小于最大成员的其余成员，则按照自己大小的倍数进行对齐</u>**。</p>
+<p>例如在我们的第三个例子中char a先占据了1字节大小，然后要放入int b，int b自身大小为4字节，所以需要按照4字节对齐，因此给char a后填充了三个字节使得b可以对齐4，后面应该将8字节的long c放入内存，所以应该按照8字节对齐，前面的char a对齐4字节后再加上int b刚好8字节对齐了，所以不需要填充，直接把long c放入内存，后面的也是相同的，就不加赘述了</p>
+<hr>
+<h2 id="在机器即程序中将控制与数据结合起来"><a href="#在机器即程序中将控制与数据结合起来" class="headerlink" title="在机器即程序中将控制与数据结合起来"></a>在机器即程序中将控制与数据结合起来</h2><p>好了，在前面学习了那么多的东西，到最后一点了，我们才开始看关于真正会在pwn里面利用的部分</p>
+<h3 id="理解指针"><a href="#理解指针" class="headerlink" title="理解指针"></a>理解指针</h3><p>一些指针和它们映射到机器代码的关键原则：</p>
+<ul>
+<li><strong>每个指针都有一个类型</strong>：指针的类型决定了它指向的数据类型及其访问方式。</li>
+<li><strong>每个指针都有一个值</strong>：指针存储的是一个内存地址，该地址指向实际的数据。</li>
+<li><strong>指针用</strong>​ <strong>​<code>&amp;</code>​</strong> ​<strong>运算符创建</strong>：<code>&amp;</code> 运算符返回一个变量的地址，用于创建指针。</li>
+<li>​ <strong>​<code>*</code>​</strong> ​ <strong>操作符用于间接引用指针</strong>：通过 <code>*</code> 运算符，可以访问指针指向的值（解引用）。</li>
+<li><strong>数组与指针紧密联系</strong>：数组名本质上是指向数组首元素的指针，指针可以通过索引访问数组元素。</li>
+<li><strong>将指针从一种类型强制转换成另一种类型，只改变它的类型，而不改变它的值</strong>：通过强制类型转换，你可以改变指针的类型，但指向的内存地址不变。</li>
+<li><strong>指针也可以指向函数：</strong> 这提供了一个很强大的存储和向代码传递引用的功能,这些引用 可以被程序的某个其他部分调用。</li>
+</ul>
+<p>对于以下声明:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> (*f)(<span class="hljs-type">int</span>*);<br></code></pre></td></tr></table></figure>
+
+<p> 要从里(从“f”开始)往外读。因此,我们看到像<code>“(*f)”</code>​表明的那样,f是一个指针; 而<code>“(*f)(int* )”</code>​表明f是一个指向函数的指针,这个函数以一个int* 作为参数。 最后,我们看到,它是指向以 <code>int *</code> 为参数并返回 int 的函数的指针。</p>
+<p> <code>*f </code>​两边的括号是必需的,否则声明变成<code> int *f(int*);</code>​ 它会被解读成 <code>(int *) f(int*);</code>​ 也就是说,它会被解释成一个函数原型,声明了一个函数,它以一个int * 作为参数 并返回一个int*。</p>
+<h3 id="gdb调试"><a href="#gdb调试" class="headerlink" title="gdb调试"></a>gdb调试</h3><p>GNU 调试器 GDB 提供了许多有用的特性，允许我们机器级分析，具体可以用</p>
+<p>plaintext</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">$gdb file<br></code></pre></td></tr></table></figure>
+
+<p>来进入 gdb shell 调试程序，输入 help 可以查看具体命令和效果，常见的有</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>run</td>
+<td>运行程序（在此给出参数）</td>
+</tr>
+<tr>
+<td>quit</td>
+<td>退出</td>
+</tr>
+<tr>
+<td>kill</td>
+<td>杀死程序</td>
+</tr>
+<tr>
+<td>b xxx</td>
+<td>下断点</td>
+</tr>
+<tr>
+<td>delete</td>
+<td>删除断点</td>
+</tr>
+<tr>
+<td>s</td>
+<td>单步运行</td>
+</tr>
+<tr>
+<td>si</td>
+<td>机器级单步运行</td>
+</tr>
+<tr>
+<td>n</td>
+<td>步过运行</td>
+</tr>
+<tr>
+<td>ni</td>
+<td>步过运行</td>
+</tr>
+<tr>
+<td>c</td>
+<td>继续运行</td>
+</tr>
+<tr>
+<td>finish</td>
+<td>步过运行直到ret</td>
+</tr>
+<tr>
+<td>disass</td>
+<td>查看反汇编代码</td>
+</tr>
+<tr>
+<td>p</td>
+<td>打印数据</td>
+</tr>
+<tr>
+<td>info register</td>
+<td>查看寄存器</td>
+</tr>
+<tr>
+<td>help</td>
+<td>调出手册</td>
+</tr>
+</tbody></table>
+<h3 id="缓冲区溢出"><a href="#缓冲区溢出" class="headerlink" title="缓冲区溢出"></a>缓冲区溢出</h3><p>由于C对于数组引用不进行任何边界检查,而且局部变量和状态信息(例 如保存的寄存器值和返回地址)都存放在栈中。这两种情况结合到一起就能导致严重的程 序错误,对越界的数组元素的写操作会破坏存储在栈中的状态信息。当程序使用这个被破坏的状态,试图重新加载寄存器或执行 ret 指令时,就会出现很严重的错误。</p>
+<p>一种特别常见的状态破坏称为缓冲区溢出(buffer overflow)。通常,在栈中分配某个 字符数组来保存一个字符串,但是字符串的长度超出了为数组分配的空间。</p>
+<p>又得拿出这张图片了</p>
+<p><img src="https://raw.githubusercontent.com/N1mbus-lock/Pic/main/Pic/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-04-25%20161956-20250427004711-bz7enn8.png" srcset="/img/loading.gif" lazyload alt="屏幕截图 2025-04-25 161956"></p>
+<p>我们在函数被调用时的输入放在局部变量中，当我们的输入超过为它所分配的位置，将逐步占据栈上的被保存寄存器和返回地址（为什么向上增长，数据由低地址向高地址增长）。通过我们之前的学习得知，返回地址为被调用函数执行结束时要运行的指令地址，如果这时候我们修改这个地址为我们自己想要执行的位置（比如后门）就可以获得shell了</p>
+<h3 id="对抗缓冲区溢出"><a href="#对抗缓冲区溢出" class="headerlink" title="对抗缓冲区溢出"></a>对抗缓冲区溢出</h3><p>为了对抗缓冲区溢出，研究出了几种对抗方法，这也是我们现在会遇到的保护机制</p>
+<ol>
+<li>栈随机化</li>
+<li>栈破坏检测</li>
+<li>栈不可执行</li>
+</ol>
+<p>一般情况下，程序每次运行的虚拟地址都是固定不变的，这样会使得程序更容易遭受攻击，栈随机化使得每次程序运行时栈的位置都有变化，这类技术我们成为 <strong>地址空间布局随机化（Address-Space Layout Randomization）</strong>  当然，有防御，就会有攻击方法。我们只需要在缓冲区中插入比较多的 nop 指令，那么我们只要任意命中一个 nop 都可以导致我们恶意代码的顺利执行。这个序列的常用术语是 nop sled 差不多就是一直滑过去。如果随机化的可能性达到了 2^21，那么如果命中位置只有一个的话，我们就要赌这 2^(-21) 的概率，这显然不太能被接受，假如我们插入了 255 字节的 nop，那么我们任意命中 256 中的其中一个，我们都可以执行成功，概率直接缩小到 2^13，这个数字大小能稍微被接受了。</p>
+<p>第二个思路是在造成严重的后果之前尽可能检测到栈溢出了，思想就是往返回地址之前插入一段随机数，在函数即将返回的时候，检查这段随机数是否被更改，如果被更改，调用 __stack_chk_fail 函数进行异常处理终止程序运行。一般这个随机数我们称为 canary（<strong>金丝雀</strong>，实际在下矿的时候主要用于探测煤矿是否有毒），现在的 gcc 版本默认添加 canary，但是我们可以通过参数 -fno-stack-protector 参数关闭这个保护。</p>
+<p>第三个思路就是<strong>NX（NO EXECUTE）</strong> 让栈中不可执行代码，我们往栈中插入代码的思想也就变的不可行了，但是我们仍然可以使用 ROP 的思想去绕过这一保护。</p>
+<h2 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h2><p>终于写完了，好累，第一次文章，还是这么长的文章，参考了很多<a target="_blank" rel="noopener" href="https://xia0ji233.pro/2022/09/22/CSAPP_3/">xia0ji233</a>师傅的内容和文章结构（师傅写得实在是太好了），我自己在读这一章的时候好多地方理解的不太清楚，参考了一些其他相关的文章和gpt给的解释，如果文章里面有什么错误，请一定要留言告诉我</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E4%B9%A6%E7%B1%8D%E9%98%85%E8%AF%BB/" class="category-chain-item">书籍阅读</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/CSAPP/" class="print-no-link">#CSAPP</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>CSAPP 第三章：程序的机器级表示</div>
+      <div>http://example.com/post/csapp-chapter-3-machinelevel-representation-of-programs-z17vqpx.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>N1mbus</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年4月25日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2025年4月25日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/post/hitcon-ctf------setjmp-xgw6m.html" title="HITCON CTF —— setjmp">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">HITCON CTF —— setjmp</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/post/build-a-personal-blog-of-your-own-1qpsrd.html" title="搭建一个属于自己的个人博客">
+                        <span class="hidden-mobile">搭建一个属于自己的个人博客</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"HGQ2AAsXTVipJuHOCxNQPl8A-gzGzoHsz","appKey":"xkvgsYTbMeB59u2gc4HqxaBN","path":"window.location.pathname","placeholder":"说点什么吧","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
